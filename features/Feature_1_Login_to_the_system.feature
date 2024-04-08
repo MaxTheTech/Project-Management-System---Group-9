@@ -4,9 +4,9 @@ Feature: Login to the system #Emil 1
 
 Scenario: Employee logs in
     Given that no-one is logged in
-    And an employee with an "ABCD" exists
-    When an employee logs in with their "ABCD"
-    Then the employee "ABCD" is logged into the system
+    And an employee with an ID exists
+    When the employee logs in with their ID
+    Then the employee is logged into the system
 
 Scenario: Employee does not exists
     Given that no-one is logged in

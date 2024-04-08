@@ -14,19 +14,19 @@ public class LoginSteps {
         //throw new io.cucumber.java.PendingException();
         assertTrue(true);
     }
-    @Given("an employee with an {string} exists")
+    @Given("an employee with an ID exists")
     public void anEmployeeWithAnExists(String string) {
         // Write code here that turns the phrase above into concrete actions
         //throw new io.cucumber.java.PendingException();
         assertTrue(true);
     }
-    @When("an employee logs in with their {string}")
+    @When("the employee logs in with their ID")
     public void anEmployeeLogsInWithTheir(String string) {
         // Write code here that turns the phrase above into concrete actions
         //throw new io.cucumber.java.PendingException();
         assertTrue(true);
     }
-    @Then("the employee {string} is logged into the system")
+    @Then("the employee is logged into the system")
     public void theEmployeeIsLoggedIntoTheSystem(String string) {
         // Write code here that turns the phrase above into concrete actions
         //throw new io.cucumber.java.PendingException();
