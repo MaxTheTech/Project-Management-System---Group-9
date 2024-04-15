@@ -6,7 +6,7 @@ Scenario: New project is created
     Given an employee is logged in
     And the current date is in the year 2024
     When the employee creates a new project with the name "TestProject"
-    Then a project with the name "TestProject" and ID "24XYZ" is created, where XYZ is the number of the project
+    Then a project with the name "TestProject" and ID 24001 is created, where 001 is the number of the project
 
 Scenario: Project name already exists
     Given an employee is logged in
