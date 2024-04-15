@@ -1,6 +1,8 @@
 package dtu.projectManagementSystem.acceptance_tests.steps;
 
+import dtu.projectManagementSystem.acceptance_tests.helper.ErrorMessageHolder;
 import dtu.projectManagementSystem.app.SoftwareHuset;
+import dtu.projectManagementSystem.domain.Project;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -9,9 +11,11 @@ import org.junit.jupiter.api.Assumptions;
 
 public class ProjectSteps {
     private SoftwareHuset softwareHuset = new SoftwareHuset();
+    private ErrorMessageHolder errorMessage;
 
-    public ProjectSteps(SoftwareHuset softwareHuset) {
+    public ProjectSteps(SoftwareHuset softwareHuset, ErrorMessageHolder errorMessage) {
         this.softwareHuset = softwareHuset;
+        this.errorMessage = errorMessage;
     }
     @Given("an employee is logged in")
     public void an_employee_is_logged_in() {
@@ -24,7 +28,11 @@ public class ProjectSteps {
     }
     @When("the employee creates a new project with the name {string}")
     public void the_employee_creates_a_new_project_with_the_name(String string) {
-        softwareHuset.createProject(string);
+        try {
+            softwareHuset.createProject(string);
+        } catch (Exception e) {
+            errorMessage.setErrorMessage(e.getMessage());
+        }
     }
     @Then("a project with the name {string} and ID {int} is created, where 001 is the number of the project")
     public void a_project_with_the_name_and_id_is_created_where_xyz_is_the_number_of_the_project(String string, int int1) {
@@ -32,13 +40,14 @@ public class ProjectSteps {
     }
 
     @Given("a project with the name {string} exists")
-    public void a_project_with_the_name_exists(String string) {
+    public void a_project_with_the_name_exists(String string) throws Exception {
+        softwareHuset.createProject(string);
         Assertions.assertTrue(softwareHuset.projectExist(string));
+
     }
 
     @Then("the project is not created, and an error message {string} appears")
-    public void the_project_is_not_created_and_an_error_message_appears(String string) {
-        // Write code here that turns the phrase above into concrete actions
-
+    public void the_project_is_not_created_and_an_error_message_appears(String string) throws Exception {
+        Assertions.assertEquals(string,errorMessage.getErrorMessage());
     }
 }

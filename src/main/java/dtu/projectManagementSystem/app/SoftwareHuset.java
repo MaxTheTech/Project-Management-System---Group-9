@@ -22,6 +22,7 @@ public class SoftwareHuset {
     private static String currentlyLoggedIn;
     private ArrayList<Project> projectList = new ArrayList<>();
     private DateServer date = new DateServer();
+    private int projectId = 0;
 
     public void employeeLogin(String id) throws Exception {
         EmployeeInfo ei = new EmployeeInfo(id);
@@ -49,6 +50,7 @@ public class SoftwareHuset {
     }
 
     public SoftwareHuset() {
+        this.projectId = (date.year - 2000) * 1000;
     }
 
     public static void setCurrentlyLoggedIn(String login) {
@@ -66,14 +68,20 @@ public class SoftwareHuset {
     public static List<String> employees;
 
 
-    public void createProject(String projectName) {
+    public void createProject(String projectName) throws Exception {
+        if (projectExist(projectName)) {
+            throw new Exception("Project already exists");
+        }
         int id = generateProjectId();
         Project project = new Project(projectName, id);
         projectList.add(project);
+
     }
 
+
     private int generateProjectId() {
-        return (date.year - 2000) * 1000 + projectList.size() + 1;
+        projectId++;
+        return projectId;
     }
 
     public void registerEmployee(EmployeeInfo e) throws Exception {
