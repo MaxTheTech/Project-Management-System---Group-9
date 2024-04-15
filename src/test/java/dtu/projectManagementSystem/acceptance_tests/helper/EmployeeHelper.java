@@ -3,7 +3,7 @@ package dtu.projectManagementSystem.acceptance_tests.helper;
 import dtu.projectManagementSystem.app.SoftwareHuset;
 import dtu.projectManagementSystem.info.EmployeeInfo;
 
-public class EmployeeHelper {
+public class EmployeeHelper { //Max-Peter Schrøder (s214238)
     private EmployeeInfo employee;
     private SoftwareHuset softwareHuset;
 

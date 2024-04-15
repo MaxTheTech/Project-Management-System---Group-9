@@ -14,7 +14,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 
-public class LoginSteps {
+public class LoginSteps { //Max-Peter Schrøder (s214238)
 
     private SoftwareHuset softwareHuset;
     private EmployeeInfo employee;
@@ -36,7 +36,7 @@ public class LoginSteps {
         employee = helper.registerExampleEmployee();
     }
     @When("the employee logs in with their ID")
-    public void anEmployeeLogsInWithTheirId() throws Exception {
+    public void anEmployeeLogsInWithTheirId() {
         try {
             softwareHuset.employeeLogin(employee.getId());
         } catch (Exception e) {
@@ -55,7 +55,13 @@ public class LoginSteps {
 
     @Then("the employee is not logged into the system, and an error message {string} appears")
     public void theEmployeeIsNotLoggedIntoTheSystemAndAnErrorMessageAppears(String error) throws Exception {
-        Assert.assertEquals("Employee not found with ID: mps", errorMessage.getErrorMessage());
-        System.out.print(errorMessage.getErrorMessage());
+        Assert.assertEquals(error, errorMessage.getErrorMessage());
+        System.out.println(errorMessage.getErrorMessage());
+    }
+
+    @Given("an employee is logged in")
+    public void anEmployeeIsLoggedIn() throws Exception {
+        employee = helper.registerExampleEmployee();
+        softwareHuset.employeeLogin(employee.getId());
     }
 }

@@ -1,4 +1,4 @@
-Feature: Login to the system #Emil 1
+Feature: Login to the system
     Description: Login into the system
     Actor: Employee
 

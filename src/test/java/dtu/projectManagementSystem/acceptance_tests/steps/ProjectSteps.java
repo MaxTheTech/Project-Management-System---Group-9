@@ -17,15 +17,12 @@ public class ProjectSteps {
         this.softwareHuset = softwareHuset;
         this.errorMessage = errorMessage;
     }
-    @Given("an employee is logged in")
-    public void an_employee_is_logged_in() {
-        int i = 1;
 
-    }
     @Given("the current date is in the year {int}")
     public void the_current_date_is_in_the_year(int int1) {
         Assertions.assertEquals(int1, softwareHuset.getYear());
     }
+
     @When("the employee creates a new project with the name {string}")
     public void the_employee_creates_a_new_project_with_the_name(String string) {
         try {
@@ -34,6 +31,7 @@ public class ProjectSteps {
             errorMessage.setErrorMessage(e.getMessage());
         }
     }
+
     @Then("a project with the name {string} and ID {int} is created, where 001 is the number of the project")
     public void a_project_with_the_name_and_id_is_created_where_xyz_is_the_number_of_the_project(String string, int int1) {
         Assertions.assertEquals(string,softwareHuset.getProjectName(int1));

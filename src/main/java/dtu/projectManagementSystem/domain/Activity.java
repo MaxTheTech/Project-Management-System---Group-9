@@ -1,14 +1,11 @@
 package dtu.projectManagementSystem.domain;
 
-import dtu.projectManagementSystem.app.DateServer;
 
-import java.util.Calendar;
-
-public abstract class Activity {
+public abstract class Activity { //Max-Peter Schrøder (s214238)
     private String name;
-    private int id;
+    private Integer id;
 
-    public Activity(String name, int id) {
+    public Activity(String name, Integer id) {
         this.name = name;
         this.id = id;
     }
@@ -19,7 +16,7 @@ public abstract class Activity {
         return this.name;
     }
 
-    public int getId() {
+    public Integer getId() {
         return this.id;
     }
 

@@ -2,7 +2,7 @@ package dtu.projectManagementSystem.info;
 import dtu.projectManagementSystem.domain.Employee;
 
 
-public class EmployeeInfo {
+public class EmployeeInfo { //Max-Peter Schrøder (s214238)
 
     private String id;
     public EmployeeInfo(String id) {

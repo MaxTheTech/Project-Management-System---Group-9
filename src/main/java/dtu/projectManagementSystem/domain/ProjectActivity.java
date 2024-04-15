@@ -8,7 +8,7 @@ public class ProjectActivity extends Activity {
     private int durationWeeks;
     private int expectedWorkloadHalfhours;
 
-    public ProjectActivity(String name, int id) {
+    public ProjectActivity(String name, Integer id) {
         super(name, id);
     }
 
