@@ -68,7 +68,6 @@ public class SoftwareHuset {
                 .filter(e -> e.getId().equals(ei.getId()))
                 .findAny()
                 .orElse(null);
-        return employeeStream;
     }
 
     public static void setCurrentlyLoggedIn(String login) {
@@ -77,10 +76,6 @@ public class SoftwareHuset {
 
     public static String getCurrentlyLoggedIn() {
         return currentlyLoggedIn;
-    }
-
-    public boolean isLoggedIn() {
-        return this.isLoggedIn;
     }
 
     public static List<String> employees;
