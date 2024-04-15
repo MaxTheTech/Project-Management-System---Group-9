@@ -56,5 +56,6 @@ public class LoginSteps {
     @Then("the employee is not logged into the system, and an error message {string} appears")
     public void theEmployeeIsNotLoggedIntoTheSystemAndAnErrorMessageAppears(String error) throws Exception {
         Assert.assertEquals("Employee not found with ID: mps", errorMessage.getErrorMessage());
+        System.out.print(errorMessage.getErrorMessage());
     }
 }

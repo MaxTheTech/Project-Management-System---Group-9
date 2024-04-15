@@ -1,6 +1,7 @@
 package dtu.projectManagementSystem.info;
 import dtu.projectManagementSystem.domain.Employee;
 
+
 public class EmployeeInfo {
 
     private String id;

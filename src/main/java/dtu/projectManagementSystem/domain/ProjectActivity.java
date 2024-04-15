@@ -1,4 +1,43 @@
 package dtu.projectManagementSystem.domain;
 
-public class ProjectActivity {
+import dtu.projectManagementSystem.app.DateServer;
+
+public class ProjectActivity extends Activity {
+
+    private DateServer startingWeek;
+    private int durationWeeks;
+    private int expectedWorkloadHalfhours;
+
+    public ProjectActivity(String name, int id) {
+        super(name, id);
+    }
+
+    public void setStartingWeek(DateServer startingWeek) {
+        this.startingWeek = startingWeek;
+    }
+
+    public DateServer getStartingWeek() {
+        return this.startingWeek;
+    }
+
+    public void setDurationWeeks(int durationWeeks) {
+        this.durationWeeks = durationWeeks;
+    }
+
+    public int getDurationWeeks() {
+        return this.durationWeeks;
+    }
+
+    public void setExpectedWorkloadHalfhours(int halfhours) {
+        this.expectedWorkloadHalfhours = halfhours;
+    }
+
+    public int getExpectedWorkloadHalfhours() {
+        return this.expectedWorkloadHalfhours;
+    }
+
+    public String getTypeName() {
+        return "Project Activity";
+    }
+
 }
