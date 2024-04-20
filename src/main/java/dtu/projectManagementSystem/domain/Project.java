@@ -1,11 +1,15 @@
 package dtu.projectManagementSystem.domain;
 
+import io.cucumber.java.an.E;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Project {
 
     private int projectId;
+
+    private boolean hasManager = false;
     private String managerId;
     private String projectName;
     private int durationInWeeks;
@@ -25,8 +29,12 @@ public class Project {
         return this.projectId;
     }
 
-    public void setManagerId(String managerId) {
+    public void setManagerId(String managerId) throws Exception {
+        if (hasManager){
+            throw new Exception("Project already has an assigned project manager");
+        }
         this.managerId = managerId;
+        this.hasManager = true;
     }
 
     public String getManagerId() {
@@ -43,6 +51,9 @@ public class Project {
 
     public void setExpectedWorkloadHours(int expectedWorkloadHours) {
         this.expectedWorkloadHours = expectedWorkloadHours;
+    }
+    public void setHasManager(Boolean bool){
+        this.hasManager=bool;
     }
 
     public int getExpectedWorkloadHours() {

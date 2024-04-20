@@ -174,6 +174,15 @@ public class SoftwareHuset {
         return false;
     }
 
+    public Project getProject(String name){
+        for (Project project : projectList){
+            if (project.getProjectName().equals(name)){
+                return project;
+            }
+        } return null;
+        // Måske throw exception i stedet for return null?
+    }
+
 }
 
 

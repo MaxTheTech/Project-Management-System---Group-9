@@ -12,7 +12,6 @@ for Cucumber tests to be recognized by Maven, the class name has to have
 either the word Test in the beginning or at the end. 
 For example, the class name CucumberTests (Test with an s) will be ignored by Maven.
 */
-
 @RunWith(Cucumber.class)
 @CucumberOptions(features = "features",
 		plugin = { "html:target/cucumber/wikipedia.html"},
