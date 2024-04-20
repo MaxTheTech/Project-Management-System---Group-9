@@ -9,6 +9,7 @@ import dtu.projectManagementSystem.info.EmployeeInfo;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.cucumber.java.en.And;
 import org.junit.Assert;
 
 public class EmployeeSteps { //Max-Peter Schrøder (s214238)

@@ -9,10 +9,12 @@ import dtu.projectManagementSystem.acceptance_tests.helper.EmployeeHelper;
 import dtu.projectManagementSystem.acceptance_tests.helper.ErrorMessageHolder;
 import dtu.projectManagementSystem.app.SoftwareHuset;
 import dtu.projectManagementSystem.info.EmployeeInfo;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 
 public class LoginSteps { //Max-Peter Schrøder (s214238)
 
@@ -64,4 +66,5 @@ public class LoginSteps { //Max-Peter Schrøder (s214238)
         employee = helper.registerExampleEmployee();
         softwareHuset.employeeLogin(employee.getId());
     }
+
 }

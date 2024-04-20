@@ -86,7 +86,7 @@ public class SoftwareHuset {
             throw new Exception("Project already exists");
         }
         int id = generateProjectId();
-        Project project = new Project(projectName, id);
+        Project project = new Project(projectName, id,this);
         projectList.add(project);
     }
 
@@ -173,6 +173,9 @@ public class SoftwareHuset {
         }
         return false;
     }
+
+
+
 
     public Project getProject(String name){
         for (Project project : projectList){

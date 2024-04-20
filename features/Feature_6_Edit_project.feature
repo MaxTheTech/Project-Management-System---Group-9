@@ -5,7 +5,7 @@ Feature: Edit project # Simon 2
 Scenario: Set project parameters
     Given an employee is logged in
     And he is the project manager of a project "TestProject"
-    When the project manager sets the starting week as "5", the duration as "3" weeks, the year as "2024", and expected workload as "200" hours
+    When the project manager sets the starting week as 5, the duration as 3 weeks, the year as 2024, and expected workload as 200 hours
     Then the project has these parameters set
 
 Scenario: Change project parameters
@@ -25,5 +25,5 @@ Scenario: Change project name but already exists
     Given an employee is logged in
     And he is the project manager of a project "TestProject"
     And another project exists with the name "TestProject2"
-    When the project manager changes the name to "TestProject2"
+    When he changes the name of the project to "TestProject2"
     Then the project name is not changed and an error message "This project name already exists as a separate project" appears
