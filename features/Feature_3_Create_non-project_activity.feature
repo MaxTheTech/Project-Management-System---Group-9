@@ -11,7 +11,7 @@ Scenario: Create a non-project activity that already exists
     Given an employee is logged in
     And there is a non-project activity with the name "Vacation"
     When the employee creates a non-project activity with the name "Vacation"
-    Then the error message "Employee mps is already working on Non-Project Activity: Vacation" appears
+    Then the error message "Non-project activity Vacation for employee mps already exists" appears
 
 Scenario: Set starting day and duration for non-project activity
     Given an employee is logged in

@@ -1,4 +1,4 @@
-Feature: Register time spent on activity  # Simon 1
+Feature: Register time spent on activity
     Description: Register the time spent on an activity on the given day
     Actor: Employee
 

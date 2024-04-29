@@ -1,4 +1,4 @@
-Feature: Edit project # Simon 2
+Feature: Edit project
     Description: Set and edit the parameters of a project
     Actor: Project manager
 

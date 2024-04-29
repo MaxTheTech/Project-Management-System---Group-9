@@ -1,4 +1,4 @@
-Feature: Check available employees # Charlotte 2 -> Seb 4
+Feature: Check available employees
     Description: The act of checking the employees schedule for a specific project
     Actor: Project manager
 
