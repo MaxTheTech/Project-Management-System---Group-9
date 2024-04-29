@@ -22,13 +22,17 @@ public class Application {
                 System.out.println("2. Login");
                 System.out.println("3. Exit");
                 System.out.print("Enter your choice: ");
-                int choice = scanner.nextInt();
+                int choice = 0;
+                try {
+                    choice = scanner.nextInt();
+                } catch (InputMismatchException ignored) {
+                }
                 scanner.nextLine();  // Consume newline left-over
     
                 switch (choice) {
                     case 1:
                         System.out.println("Enter employee ID");
-                        String newEmployeeID = scanner.nextLine();
+                        String newEmployeeID = scanner.next();
                         try {
                             EmployeeInfo newEmployee = new EmployeeInfo(newEmployeeID);
                             softwareHuset.registerEmployee(newEmployee);
@@ -42,7 +46,7 @@ public class Application {
 
                     case 2:
                         System.out.print("Enter your username: ");
-                        String username = scanner.nextLine();
+                        String username = scanner.next();
                         try {
                             softwareHuset.employeeLogin(username);
                             showMainMenu(scanner);
@@ -72,9 +76,14 @@ public class Application {
                 System.out.println("3. Logout");
     
                 System.out.print("Enter your choice: ");
-                int selection = scanner.nextInt();
+                int choice = 0;
+                try {
+                    choice = scanner.nextInt();
+                } catch (InputMismatchException ignored) {
+                }
+                scanner.nextLine();
     
-                switch (selection) {
+                switch (choice) {
                     case 1:
                         showEmployeeManagementMenu(scanner);
                         break;
@@ -95,22 +104,27 @@ public class Application {
         private static void showEmployeeManagementMenu(Scanner scanner) throws Exception {
             boolean employeeManagementMenuRunning = true;
             while (employeeManagementMenuRunning) {
-                System.out.println("\n=== Management for employee:" + softwareHuset.getLoggedInId() + " ===");
+                System.out.println("\n=== Management for employee: " + softwareHuset.getLoggedInId() + " ===");
                 System.out.println("1. View employee activities");
                 System.out.println("2. Create non-project activity");
                 System.out.println("3. Edit a non-project activity");
                 System.out.println("4. Register time");
                 System.out.println("5. Back");
                 System.out.print("Enter your choice: ");
-                int selection = scanner.nextInt();
+                int choice = 0;
+                try {
+                    choice = scanner.nextInt();
+                } catch (InputMismatchException ignored) {
+                }
+                scanner.nextLine();
 
-                switch (selection) {
+                switch (choice) {
                     case 1:
                         showEmployeeActivitiesMenu(scanner);
                         break;
                     case 2:
                         System.out.println("Enter name for non-project activity");
-                        String nonProjectName = scanner.nextLine();
+                        String nonProjectName = scanner.next();
                         try {
                             softwareHuset.createNonProjectActivity(nonProjectName);
                         } catch (Exception e){
@@ -120,7 +134,7 @@ public class Application {
                         break;
                     case 3:
                         System.out.println("Enter name of the non-project activity to edit");
-                        String nonProjectActivityToEdit = scanner.nextLine();
+                        String nonProjectActivityToEdit = scanner.next();
                         NonProjectActivity nonProjectActivity=softwareHuset.getLoggedInEmployee().getNonProjectActivity(nonProjectActivityToEdit);
                         if (nonProjectActivity != null){
                             editNonProjectActivityMenu(scanner,nonProjectActivity);
@@ -150,18 +164,29 @@ public class Application {
                 System.out.println("3. Show non-project activities for "+softwareHuset.getLoggedInId());
                 System.out.println("4. Back");
                 System.out.print("Enter your choice: ");
-                int selection = scanner.nextInt();
+                int choice = 0;
+                try {
+                    choice = scanner.nextInt();
+                } catch (InputMismatchException ignored) {
+                }
+                scanner.nextLine();
 
-                switch (selection) {
+                switch (choice) {
                     case 1:
-                        //Måske tilføj et print, hvis der ikk er nogen activities
-                        for (Activity activity :softwareHuset.getLoggedInEmployee().getEmployeeActivities())
+                        int activityCount = 0;
+                        for (Activity activity :softwareHuset.getLoggedInEmployee().getEmployeeActivities()){
                             System.out.println(activity.getName());
+                            activityCount++;
+                        }
+                        if (activityCount==0){
+                            System.out.println(softwareHuset.getLoggedInId() + " has no activities.");
+                        }
+
+
                         break;
                     case 2:
                         System.out.println("Enter project to show activities for");
-                        String projectName1 = scanner.nextLine(); // Shouldn't really be here, but for some reason the line is skipped if it isn't here twice.
-                        String projectName = scanner.nextLine();
+                        String projectName = scanner.next();
                         if(softwareHuset.projectExist(projectName)){
                             for (ProjectActivity projectActivity : softwareHuset.getLoggedInEmployee().getEmployeeProjectActivities()){
                                 if (projectActivity.getParentproject().getProjectName().equals(projectName)){
@@ -195,9 +220,14 @@ public class Application {
                 System.out.println("2. Edit duration (in days) ");
                 System.out.println("3. Back");
                 System.out.print("Enter your choice: ");
-                int selection = scanner.nextInt();
+                int choice = 0;
+                try {
+                    choice = scanner.nextInt();
+                } catch (InputMismatchException ignored) {
+                }
+                scanner.nextLine();
 
-                switch (selection){
+                switch (choice){
                     case 1:
                         System.out.println("Enter the new starting date for "+nonProjectActivity.getName());
                         try {
@@ -231,7 +261,7 @@ public class Application {
                         try {
                             int duration = scanner.nextInt();  // Attempts to read an int from user
                             nonProjectActivity.setDurationDays(duration);
-                            System.out.println("Duration for " + nonProjectActivity.getName()+" set to "+duration);
+                            System.out.println("Duration for " + nonProjectActivity.getName()+" set to "+duration+ " days");
                         } catch (InputMismatchException e) {
                             System.out.println("Input must be an integer");
                         }
@@ -256,19 +286,24 @@ public class Application {
                 System.out.println("2. Register time on non-project activity ");
                 System.out.println("3. Back");
                 System.out.print("Enter your choice: ");
-                int selection = scanner.nextInt();
+                int choice = 0;
+                try {
+                    choice = scanner.nextInt();
+                } catch (InputMismatchException ignored) {
+                }
+                scanner.nextLine();
 
-                switch (selection){
+                switch (choice){
                     case 1:
                         System.out.println("Enter name of the project:");
-                        String projectName = scanner.nextLine();
+                        String projectName = scanner.next();
                         if(softwareHuset.projectExist(projectName)){
                             Project project = softwareHuset.getProject(projectName);
                             System.out.println("Enter project activity name:");
-                            String activityName = scanner.nextLine();
+                            String activityName = scanner.next();
                             if(project.HasActivity(activityName)){
                                 System.out.println("Enter time spent");
-                                throw new Exception ("Feature not yet implemented");
+                                System.out.println("Feature not yet implemented");
                                 ////////////////////////////////////////////////////////////////
                                 //////           Register time is not implemented       ////////
                                 ////////////////////////////////////////////////////////////////
@@ -281,11 +316,11 @@ public class Application {
                         break;
                     case 2:
                         System.out.println("Enter non-project activity name:");
-                        String nonActivityName = scanner.nextLine();
+                        String nonActivityName = scanner.next();
                         NonProjectActivity nonProjectActivity = softwareHuset.getLoggedInEmployee().getNonProjectActivity(nonActivityName);
                         if(nonProjectActivity != null){
                             System.out.println("Enter time spent");
-                            throw new Exception ("Feature not yet implemented");
+                            System.out.println("Feature not yet implemented");
                             ////////////////////////////////////////////////////////////////
                             //////           Register time is not implemented       ////////
                             ////////////////////////////////////////////////////////////////
@@ -305,10 +340,304 @@ public class Application {
         }
 
 
-        private static void showProjectManagementMenu(Scanner scanner){
+        private static void showProjectManagementMenu(Scanner scanner) throws Exception {
+            boolean projectManagementMenuRunning = true;
+            while (projectManagementMenuRunning) {
+                System.out.println("\n=== Project management ===");
+                System.out.println("1. Create project");
+                System.out.println("2. List projects");
+                System.out.println("3. Enter project");
+                System.out.println("4. Back");
+                System.out.print("Enter your choice: ");
+                int choice = 0;
+                try {
+                    choice = scanner.nextInt();
+                } catch (InputMismatchException ignored) {
+                }
+                scanner.nextLine();
 
+                switch (choice) {
+                    case 1:
+                        String projectName = scanner.next();
+                        try{
+                            softwareHuset.createProject(projectName);
+                            System.out.println("New project "+ projectName+" created");
+                        }catch (Exception e){
+                            errorMessage.setErrorMessage(e.getMessage());
+                            System.out.println(errorMessage.getErrorMessage());
+                        }
+                        break;
+                    case 2:
+                        int projectCount = 0;
+                        for(Project project : softwareHuset.getProjectRepository()){
+                            System.out.println(project.getProjectName());
+                            projectCount++;
+                        }
+                        if(projectCount==0){
+                            System.out.println("There are no projects");
+                        }
+                        break;
+                    case 3:
+                        System.out.println("Enter name of project: ");
+                        String projectToEnter = scanner.next();
+                        if(softwareHuset.projectExist(projectToEnter)){
+                            showSpecificProjectManagementMenu(scanner,softwareHuset.getProject(projectToEnter));
+                        }
+                        break;
+                    case 4:
+                        projectManagementMenuRunning=false;
+                        break;
+                    default:
+                        System.out.println("Invalid choice. Please enter 1, 2, 3 or 4.");
+                }
+            }
         }
+
+    private static void showSpecificProjectManagementMenu(Scanner scanner, Project project) throws Exception {
+        boolean specificProjectManagementMenu = true;
+        while (specificProjectManagementMenu) {
+            System.out.println("\n=== Management for project: "+project.getProjectName()+" ===");
+            System.out.println("1. Edit project");
+            System.out.println("2. List project activities");
+            System.out.println("3. Enter project activity");
+            System.out.println("4. Set project manager");
+            System.out.println("5. Enter project manager privileges");
+            System.out.println("6. Create project activity");
+            System.out.println("7. Back");
+            System.out.print("Enter your choice: ");
+            int choice = 0;
+            try {
+                choice = scanner.nextInt();
+            } catch (InputMismatchException ignored){
+            }
+            scanner.nextLine();
+
+            switch (choice) {
+                case 1:
+                    showEditProjectMenu(scanner, project);
+                    break;
+                case 2:
+                    int activityCount = 0;
+                    for(Activity activity : project.getProjectActivities()){
+                        System.out.println(activity.getName());
+                        activityCount++;
+                    }
+                    if (activityCount==0){
+                        System.out.println("There are no activities in this project");
+                    }
+                    break;
+                case 3:
+                    System.out.println("Enter project activity to edit:");
+                    String projectActivity = scanner.next();
+                    if(project.HasActivity(projectActivity)){
+                        showEditProjectActivityMenu(scanner, project.getActivity(projectActivity));
+                    }
+
+                    break;
+                case 4:
+                    if(project.isHasManager()){
+                        System.out.println("Project already has a manager");
+                    }else{
+                        project.setManagerId(softwareHuset.getLoggedInId());
+                    }
+                    break;
+                case 5:
+                    if(project.getManagerId().equals(softwareHuset.getLoggedInId())){
+                        showProjectManagerPriviligesMenu(scanner,project);
+                    }else{
+                        System.out.println("You are not the project manager for this project");
+                    }
+
+                    break;
+                case 6:
+                    System.out.println("Enter name for new project activity");
+                    String newProjectActivityName = scanner.next();
+                    System.out.println("Feature not yet implemented");
+                    ////////////////////////////////////////////////////////////////
+                    //////    Create project activity is not implemented    ////////
+                    ////////////////////////////////////////////////////////////////
+                    break;
+                case 7:
+                    specificProjectManagementMenu=false;
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please enter 1, 2, 3, 4, 5 or 6.");
+            }
+        }
+    }
+
+    private static void showProjectManagerPriviligesMenu(Scanner scanner, Project project) throws Exception {
+        boolean projectManagerPriviligesMenu = true;
+        while (projectManagerPriviligesMenu) {
+            System.out.println("\n=== Management for employee: ===");
+            System.out.println("1. List available employees for project activity");
+            System.out.println("2. Assign employee to project activity");
+            System.out.println("3. Generate project report");
+            System.out.println("4. Back");
+            System.out.print("Enter your choice: ");
+            int choice = 0;
+            try {
+                choice = scanner.nextInt();
+            } catch (InputMismatchException ignored) {
+            }
+            scanner.nextLine();
+
+            switch (choice) {
+                case 1:
+                    System.out.println("Enter project activity");
+                    String projectActivityName = scanner.next();
+                    System.out.println("Feature not yet implemented");
+                    ////////////////////////////////////////////////////////////////
+                    //////   List available employees is not implemented    ////////
+                    ////////////////////////////////////////////////////////////////
+                    break;
+                case 2:
+                    System.out.println("Enter project activity");
+                    String projectActivityName1 = scanner.next();
+                    System.out.println("Feature not yet implemented");
+                    ////////////////////////////////////////////////////////////////
+                    //////      Assign employee is not implemented          ////////
+                    ////////////////////////////////////////////////////////////////
+                    break;
+                case 3:
+                    System.out.println(project.projectReport());
+                    break;
+                case 4:
+                    projectManagerPriviligesMenu = false;
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please enter 1, 2, 3, 4 or 5.");
+            }
+        }
+    }
+
+    private static void showEditProjectActivityMenu(Scanner scanner, ProjectActivity projectActivity) {
+        boolean editProjectActivityMenuRunning = true;
+        while (editProjectActivityMenuRunning) {
+            System.out.println("\n=== Edit project activity "+projectActivity.getName()+" ===");
+            System.out.println("1. Edit starting week");
+            System.out.println("2. Edit duration");
+            System.out.println("3. Edit expected workload (in half hours)");
+            System.out.println("4. Back");
+            System.out.print("Enter your choice: ");
+            int choice = 0;
+            try {
+                choice = scanner.nextInt();
+            } catch (InputMismatchException ignored) {
+            }
+            scanner.nextLine();
+
+            switch (choice) {
+                case 1:
+                    try {
+                        System.out.println("Enter starting week:");
+                        int startingWeek = scanner.nextInt();
+                        projectActivity.setStartingWeek(startingWeek);
+                        System.out.println("Starting week for "+projectActivity.getName()+" set to "+startingWeek);
+
+                    } catch (InputMismatchException e) {
+                        System.out.println("Input must be an integer");
+                    }
+                    break;
+                case 2:
+                    try {
+                        System.out.println("Enter duration:");
+                        int duration = scanner.nextInt();
+                        projectActivity.setDurationWeeks(duration);
+                        System.out.println("Duration for "+projectActivity.getName()+" set to "+duration);
+
+                    } catch (InputMismatchException e) {
+                        System.out.println("Input must be an integer");
+                    }
+                    break;
+                case 3:
+                    try {
+                        System.out.println("Enter expected workload:");
+                        int expectedWorkload = scanner.nextInt();
+                        projectActivity.setDurationWeeks(expectedWorkload);
+                        System.out.println("Expected workload for "+projectActivity.getName()+" set to "+expectedWorkload+ " half hours");
+
+                    } catch (InputMismatchException e) {
+                        System.out.println("Input must be an integer");
+                    }
+                    break;
+                case 4:
+                    editProjectActivityMenuRunning = false;
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please enter 1, 2, 3, or 4.");
+            }
+        }
+    }
+
+    private static void showEditProjectMenu(Scanner scanner, Project project) {
+        boolean editProjectMenuRunning = true;
+        while (editProjectMenuRunning) {
+            System.out.println("\n=== Edit project "+project.getProjectName()+" ===");
+            System.out.println("1. Edit starting date (year + week)");
+            System.out.println("2. Edit duration (in weeks)");
+            System.out.println("3. Edit expected workload (in half hours)");
+            System.out.println("4. Back");
+            System.out.print("Enter your choice: ");
+            int choice = 0;
+            try {
+                choice = scanner.nextInt();
+            } catch (InputMismatchException ignored) {
+            }
+            scanner.nextLine();
+
+            switch (choice) {
+                case 1:
+                    try {
+                        System.out.println("Enter starting year:");
+                        int startingYear = scanner.nextInt();
+                        try {
+                            System.out.println("Enter starting week:");
+                            int startingWeek = scanner.nextInt();
+                            project.setStartingYear(startingYear);
+                            project.setStartingWeek(startingWeek);
+                            System.out.println("Starting date for project "+project.getProjectName()+" set to year "+startingYear+" week "+startingWeek);
+
+                        } catch (InputMismatchException e) {
+                            System.out.println("Input must be an integer");
+                        }
+
+                    } catch (InputMismatchException e) {
+                        System.out.println("Input must be an integer");
+                    }
+                    break;
+                case 2:
+                    try {
+                        System.out.println("Enter duration:");
+                        int duration = scanner.nextInt();
+                        project.setDurationInWeeks(duration);
+                        System.out.println("Duration for project "+project.getProjectName()+" set to "+duration+" weeks.");
+
+                    } catch (InputMismatchException e) {
+                        System.out.println("Input must be an integer");
+                    }
+                    break;
+                case 3:
+                    try {
+                        System.out.println("Enter expected workload (in half hours)");
+                        int expectedWorkload = scanner.nextInt();
+                        project.setExpectedWorkloadHours(expectedWorkload);
+                        System.out.println("Expected workload for project "+project.getProjectName()+ " set to " + expectedWorkload + " half hours.");
+
+                    } catch (InputMismatchException e) {
+                        System.out.println("Input must be an integer");
+                    }
+                    break;
+                case 4:
+                    editProjectMenuRunning = false;
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please enter 1, 2, 3 or 4.");
+            }
+        }
+    }
 
 
 }
+
 

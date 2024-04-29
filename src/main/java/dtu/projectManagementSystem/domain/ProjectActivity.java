@@ -4,7 +4,7 @@ import dtu.projectManagementSystem.app.DateServer;
 
 public class ProjectActivity extends Activity {
 
-    private DateServer startingWeek;
+    private int startingWeek;
     private int durationWeeks;
     private int expectedWorkloadHalfhours;
 
@@ -13,11 +13,11 @@ public class ProjectActivity extends Activity {
         super(name, id);
     }
 
-    public void setStartingWeek(DateServer startingWeek) {
+    public void setStartingWeek(int startingWeek) {
         this.startingWeek = startingWeek;
     }
 
-    public DateServer getStartingWeek() {
+    public int getStartingWeek() {
         return this.startingWeek;
     }
 

@@ -21,7 +21,7 @@ public class Project{
 
     private int startingWeek;
     private int startingYear;
-    private List<Activity> projectActivities = new ArrayList<>();
+    private List<ProjectActivity> projectActivities = new ArrayList<>();
 
     public Project(String projectName, int projectId,SoftwareHuset softwareHuset){
         this.projectName = projectName;
@@ -49,6 +49,13 @@ public class Project{
         this.hasManager = true;
     }
 
+    public ProjectActivity getActivity(String activityName){
+        for (ProjectActivity activity : projectActivities){
+            if (activity.getName().equals(activityName)){
+                return activity;
+            }
+        } return null;
+    }
     public String getManagerId() {
         return this.managerId;
     }
@@ -79,6 +86,9 @@ public class Project{
             }
         }return false;
     }
+    public boolean isHasManager(){
+        return hasManager;
+    }
     public void setSoftwareHuset(SoftwareHuset softwareHuset){this.softwareHuset=softwareHuset;}
 
     public void setHasManager(Boolean bool){
@@ -89,7 +99,7 @@ public class Project{
         return this.expectedWorkloadHours;
     }
 
-    public List<Activity> getProjectActivities() {
+    public List<ProjectActivity> getProjectActivities() {
         return projectActivities;
     }
 
