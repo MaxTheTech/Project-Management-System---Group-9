@@ -85,4 +85,32 @@ public class Project{
     public List<Activity> getProjectActivities() {
         return projectActivities;
     }
+
+    public String projectReport() throws Exception {
+        if (!softwareHuset.getLoggedInEmployee().getId().equals(managerId)){
+            throw new Exception("Only the project manager can generate reports");
+        }
+
+        String managerIdToReport;
+        if(hasManager){
+            managerIdToReport = managerId;
+        } else {
+            managerIdToReport = "None";
+        }
+
+        StringBuilder builder = new StringBuilder().
+                append("ID: ").append(projectId).append("\n").
+                append("Name: ").append(projectName).append("\n").
+                append("Manager: ").append(managerIdToReport).append("\n").
+                append("Starting week: ").append(startingWeek).append("\n").
+                append("Duration in weeks: ").append(durationInWeeks).append("\n").
+                append("Expected workload in hours: ").append(expectedWorkloadHours).append("\n").
+                append("List of activities: ");
+
+        for(int i = 0; i < projectActivities.size(); i++) {
+            builder.append(projectActivities.get(i).getName()).append("\n");
+
+        }
+        return builder.toString();
+    }
 }

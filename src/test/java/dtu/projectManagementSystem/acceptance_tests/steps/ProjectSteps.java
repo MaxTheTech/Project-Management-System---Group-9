@@ -1,9 +1,11 @@
 package dtu.projectManagementSystem.acceptance_tests.steps;
 
+import dtu.projectManagementSystem.acceptance_tests.helper.EmployeeHelper;
 import dtu.projectManagementSystem.acceptance_tests.helper.ErrorMessageHolder;
 import dtu.projectManagementSystem.acceptance_tests.helper.ProjectHelper;
 import dtu.projectManagementSystem.app.SoftwareHuset;
 import dtu.projectManagementSystem.domain.Project;
+import dtu.projectManagementSystem.info.EmployeeInfo;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -18,6 +20,8 @@ public class ProjectSteps {
     private SoftwareHuset softwareHuset = new SoftwareHuset();
 
     private Project project;
+    private EmployeeInfo employee;
+    public EmployeeHelper helper;
 
     //project parameters:
     private int durationInWeeks;
@@ -26,9 +30,10 @@ public class ProjectSteps {
     private int expectedWorkload;
     private ErrorMessageHolder errorMessage;
 
-    public ProjectSteps(SoftwareHuset softwareHuset, ErrorMessageHolder errorMessage) {
+    public ProjectSteps(SoftwareHuset softwareHuset, ErrorMessageHolder errorMessage, EmployeeHelper helper) {
         this.softwareHuset = softwareHuset;
         this.errorMessage = errorMessage;
+        this.helper = helper;
     }
 
     @Given("the current date is in the year {int}")
@@ -161,6 +166,43 @@ public class ProjectSteps {
 
     @Then("the project name is not changed and an error message {string} appears")
     public void theProjectNameIsNotChangedAndAnErrorMessageAppears(String string) {
+        Assert.assertEquals(string, errorMessage.getErrorMessage());
+    }
+
+    @Given("the employee is the project manager of a project {string}")
+    public void the_employee_is_the_project_manager_of_a_project(String string) throws Exception {
+        // Det er for mig det første nye step i feature 10, så jeg starter med at logge ind og lave et projekt
+        EmployeeInfo test = new EmployeeInfo("test");
+        softwareHuset.registerEmployee(test);
+        softwareHuset.createProject(string);
+        //set test as manager for project
+        softwareHuset.employeeLogin(test.getId());
+        softwareHuset.getProject(string).setManagerId(test.getId());
+
+        //nu kommer dette steps funktionalitet
+        Assertions.assertEquals(softwareHuset.getProject(string).getManagerId(), test.getId());
+    }
+    @When("the project manager requests a project report for the project")
+    public void the_project_manager_requests_a_project_report_for_the_project() throws Exception {
+        softwareHuset.getProject("TestProject").projectReport();
+    }
+    @Then("the project report is returned")
+    public void the_project_report_is_returned() throws Exception {
+        //System.out.println(softwareHuset.getProject("TestProject").projectReport());
+        Assertions.assertNotNull(softwareHuset.getProject("TestProject").projectReport());
+    }
+
+    @When("the employee requests a project report for the project")
+    public void theEmployeeRequestsAProjectReportForTheProject() {
+        Assertions.assertTrue(true);
+    }
+    @Then("the report is not shown, and an error message {string} appears")
+    public void theReportIsNotShownAndAnErrorMessageAppears(String string) {
+        try {
+            softwareHuset.getProject("TestProject").projectReport();
+        } catch (Exception e) {
+            errorMessage.setErrorMessage(e.getMessage());
+        }
         Assert.assertEquals(string, errorMessage.getErrorMessage());
     }
 }
