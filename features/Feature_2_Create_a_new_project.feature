@@ -1,4 +1,4 @@
-Feature: Create a new project # Max 1
+Feature: Create a new project
     Description: Create a new project with a name and generated ID
     Actor: Employee
 

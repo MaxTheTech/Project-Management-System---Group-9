@@ -1,4 +1,4 @@
-Feature: Create project report # Seb 3
+Feature: Create project report
     Description: The act of getting a project report
     Actor: Project Manager
 

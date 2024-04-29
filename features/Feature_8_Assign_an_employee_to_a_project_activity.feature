@@ -1,4 +1,4 @@
-Feature: Assign an employee to a project activity # Emil 2
+Feature: Assign an employee to a project activity
     Description: The act of assigning an employee to a project activity
     Actor: project manager
 

@@ -1,4 +1,4 @@
-Feature: Set project manager for a project # Max 2
+Feature: Set project manager for a project
     Description: An employee assigns themselves as project manager for an unassigned project
     Actor: Employee / Project manager
 

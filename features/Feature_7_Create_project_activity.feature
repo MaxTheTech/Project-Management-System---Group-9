@@ -1,4 +1,4 @@
-Feature: Create project activity # Seb 1
+Feature: Create project activity
     Description: Creating an activty and setting the parameters
     Actor: Project manager
 

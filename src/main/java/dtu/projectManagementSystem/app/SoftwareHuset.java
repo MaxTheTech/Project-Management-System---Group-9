@@ -2,28 +2,26 @@ package dtu.projectManagementSystem.app;
 
 import java.util.ArrayList;
 import dtu.projectManagementSystem.domain.Project;
+import dtu.projectManagementSystem.domain.ErrorMessageHolder;
 
 import dtu.projectManagementSystem.domain.*;
 
 import java.util.List;
-import java.util.Observable;
-import java.util.stream.Stream;
 
 import dtu.projectManagementSystem.domain.Employee;
-import dtu.projectManagementSystem.domain.Activity;
 import dtu.projectManagementSystem.info.EmployeeInfo;
-import dtu.projectManagementSystem.domain.Project;
 
 public class SoftwareHuset {
 
     private boolean isLoggedIn = false;
     private String loggedInId;
     private List<Employee> employeeRepository = new ArrayList<>();
-    private List<Project> projectRepository = new ArrayList<>();
+    private ArrayList<Project> projectRepository = new ArrayList<>();
     private static String currentlyLoggedIn;
-    private ArrayList<Project> projectList = new ArrayList<>();
     private DateServer date = new DateServer();
     private int projectId = 0;
+
+    private ErrorMessageHolder errorMessage;
 
     public SoftwareHuset() {
         this.projectId = (date.year - 2000) * 1000;
@@ -91,7 +89,7 @@ public class SoftwareHuset {
         }
         int id = generateProjectId();
         Project project = new Project(projectName, id,this);
-        projectList.add(project);
+        projectRepository.add(project);
     }
 
     private int generateProjectId() {
@@ -100,11 +98,16 @@ public class SoftwareHuset {
     }
 
     public void createNonProjectActivity(String name) throws Exception { //Max-Peter Schrøder (s214238)
-        int id = generateNonProjectActivityId();
-        NonProjectActivity activity = new NonProjectActivity(name, id);
-        Employee employee = getLoggedInEmployee();
-        employee.addActivity(activity);
-        System.out.println("Employee "+employee.getId()+" has successfully created "+activity.getTypeName()+": "+activity.getName());
+        Employee employee = getLoggedInEmployee(); // 1
+
+        if (employee.getNonProjectActivity(name) != null) { // 2
+            throw new Exception("Non-project activity "+name+" for employee "+employee.getId()+" already exists"); // 3
+        }
+
+        int id = generateNonProjectActivityId(); // 4
+        NonProjectActivity activity = new NonProjectActivity(name, id); // 5
+        employee.addActivity(activity); // 6
+        System.out.println("Employee "+employee.getId()+" has successfully created "+activity.getTypeName()+": "+activity.getName()); // 7
     }
 
     public int generateNonProjectActivityId() throws Exception { //Max-Peter Schrøder (s214238)
@@ -140,12 +143,9 @@ public class SoftwareHuset {
     }
 
     public Employee getLoggedInEmployee() throws Exception { //Max-Peter Schrøder (s214238)
-        try {
-            EmployeeInfo ei = new EmployeeInfo(loggedInId);
-            return findEmployee(ei);
-        } catch (Exception e) {
-            return null;
-        }
+        checkEmployeeLoggedIn();
+        EmployeeInfo ei = new EmployeeInfo(loggedInId);
+        return findEmployee(ei);
     }
 
     private void checkEmployeeLoggedIn() throws Exception { //Max-Peter Schrøder (s214238)
@@ -164,9 +164,9 @@ public class SoftwareHuset {
 
     public String getProjectName(int id) {
         String name = "";
-        for (int i = 0; i < projectList.size(); i++) {
-            if (projectList.get(i).getProjectId() == id) {
-                return name = projectList.get(i).getProjectName();
+        for (int i = 0; i < projectRepository.size(); i++) {
+            if (projectRepository.get(i).getProjectId() == id) {
+                return name = projectRepository.get(i).getProjectName();
             }
 
         }
@@ -174,8 +174,8 @@ public class SoftwareHuset {
     }
 
     public boolean projectExist(String name) {
-        for (int i = 0; i < projectList.size(); i++) {
-            if (projectList.get(i).getProjectName().equals(name)) {
+        for (int i = 0; i < projectRepository.size(); i++) {
+            if (projectRepository.get(i).getProjectName().equals(name)) {
                 return true;
             }
         }
@@ -184,8 +184,9 @@ public class SoftwareHuset {
 
 
 
+
     public Project getProject(String name){
-        for (Project project : projectList){
+        for (Project project : projectRepository){
             if (project.getProjectName().equals(name)){
                 return project;
             }
