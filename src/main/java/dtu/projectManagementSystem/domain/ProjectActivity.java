@@ -8,6 +8,7 @@ public class ProjectActivity extends Activity {
     private int durationWeeks;
     private int expectedWorkloadHalfhours;
 
+    private Project parentProject;
     public ProjectActivity(String name, Integer id) {
         super(name, id);
     }
@@ -27,6 +28,8 @@ public class ProjectActivity extends Activity {
     public int getDurationWeeks() {
         return this.durationWeeks;
     }
+
+    public Project getParentproject;
 
     public void setExpectedWorkloadHalfhours(int halfhours) {
         this.expectedWorkloadHalfhours = halfhours;

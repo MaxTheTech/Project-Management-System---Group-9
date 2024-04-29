@@ -13,10 +13,6 @@ public class Application {
             Scanner scanner = new Scanner(System.in);
             boolean running = true;
 
-            softwareHuset.createNonProjectActivity("Non1");
-            softwareHuset.createNonProjectActivity("Non2");
-
-
 
             // Main loop for the program
             while (running) {
@@ -140,26 +136,24 @@ public class Application {
             boolean showEmployeeActivitiesMenuRunning = true;
             while (showEmployeeActivitiesMenuRunning) {
                 System.out.println("\n=== Show activities for employee:" + softwareHuset.getLoggedInId() + " ===");
-                System.out.println("1. Show All");
-                System.out.println("2. Show activities for a given project");
-                System.out.println("3. Show non-project activities");
+                System.out.println("1. Show all for "+ softwareHuset.getLoggedInId());
+                System.out.println("2. Show activities for a given project for" +softwareHuset.getLoggedInId());
+                System.out.println("3. Show non-project activities for "+softwareHuset.getLoggedInId());
                 System.out.println("4. Back");
                 System.out.print("Enter your choice: ");
                 int selection = scanner.nextInt();
 
                 switch (selection) {
                     case 1:
-                        for(Project project : softwareHuset.getProjectRepository()){
-                            System.out.println("Projects in "+ project.getProjectName()+":");
-                            for(Activity activity : project.getProjectActivities()){
-                                System.out.println(activity.getName());
-                            }
-                            System.out.println();
-                        }
-                        for(NonProjectActivity nonProjectActivity : softwareHuset.getLoggedInEmployee().getEmployeeNonProjectActivities())
-                            System.out.println(nonProjectActivity.getName());
+                        for (Activity activity :softwareHuset.getLoggedInEmployee().getEmployeeActivities())
+                            System.out.println(activity.getName());
                         break;
                     case 2:
+                        System.out.println("Enter project to show activities for");
+                            for (Project project : softwareHuset.getProjectRepository()){
+
+                            }
+
                         break;
                     case 3:
                         break;
