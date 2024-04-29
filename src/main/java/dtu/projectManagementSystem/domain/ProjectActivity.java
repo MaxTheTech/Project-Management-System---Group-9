@@ -29,7 +29,9 @@ public class ProjectActivity extends Activity {
         return this.durationWeeks;
     }
 
-    public Project getParentproject;
+    public Project getParentproject(){
+        return parentProject;
+    }
 
     public void setExpectedWorkloadHalfhours(int halfhours) {
         this.expectedWorkloadHalfhours = halfhours;

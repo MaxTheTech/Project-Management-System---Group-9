@@ -72,6 +72,13 @@ public class Project{
         this.projectName=name;
 
     }
+    public boolean HasActivity(String activityName){
+        for (Activity activity:projectActivities){
+            if (activity.getName().equals(activityName)){
+                return true;
+            }
+        }return false;
+    }
     public void setSoftwareHuset(SoftwareHuset softwareHuset){this.softwareHuset=softwareHuset;}
 
     public void setHasManager(Boolean bool){
