@@ -5,6 +5,7 @@ import dtu.projectManagementSystem.acceptance_tests.helper.ErrorMessageHolder;
 import dtu.projectManagementSystem.acceptance_tests.helper.ProjectHelper;
 import dtu.projectManagementSystem.app.SoftwareHuset;
 import dtu.projectManagementSystem.domain.Project;
+import dtu.projectManagementSystem.domain.ProjectActivity;
 import dtu.projectManagementSystem.info.EmployeeInfo;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;

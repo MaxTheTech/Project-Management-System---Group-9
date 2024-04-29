@@ -105,12 +105,16 @@ public class Project{
                 append("Starting week: ").append(startingWeek).append("\n").
                 append("Duration in weeks: ").append(durationInWeeks).append("\n").
                 append("Expected workload in hours: ").append(expectedWorkloadHours).append("\n").
-                append("List of activities: ");
+                append("List of activities:\n");
 
         for(int i = 0; i < projectActivities.size(); i++) {
             builder.append(projectActivities.get(i).getName()).append("\n");
 
         }
         return builder.toString();
+    }
+
+    public void addActivity(ProjectActivity activity){
+        projectActivities.add(activity);
     }
 }
