@@ -158,6 +158,9 @@ public class SoftwareHuset {
         return date.year;
     }
 
+    public List<Project> getProjectRepository(){
+        return projectRepository;
+    }
 
     public String getProjectName(int id) {
         String name = "";
