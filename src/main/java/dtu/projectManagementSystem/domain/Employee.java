@@ -11,8 +11,13 @@ public class Employee {
     private String id;
     private List<Activity> employeeActivities = new ArrayList<>();
 
-    public Employee(String id) {
-        this.id = id;
+    public Employee(String id) throws Exception {
+        if (id.length()>4 || !id.matches("^[a-zA-Z]+$")){
+            throw new Exception(id+" invalid: \nID has to be only letters and no more than 4");
+        }else {
+            this.id = id;
+        }
+
     }
 
     public String getId() {

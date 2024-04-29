@@ -9,10 +9,6 @@ public class EmployeeInfo { //Max-Peter Schrøder (s214238)
         this.id = id;
     }
 
-    public EmployeeInfo(Employee employee) {
-        this.id = employee.getId();
-    }
-
     public String getId() {
         return id;
     }
@@ -21,7 +17,7 @@ public class EmployeeInfo { //Max-Peter Schrøder (s214238)
         this.id = id;
     }
 
-    public Employee asEmployee() {
+    public Employee asEmployee() throws Exception {
         return new Employee(id);
     }
 }

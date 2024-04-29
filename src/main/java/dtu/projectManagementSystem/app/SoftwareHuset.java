@@ -65,6 +65,10 @@ public class SoftwareHuset {
                 .orElse(null);
     }
 
+    public List<Employee> getEmployeeRepository(){
+        return employeeRepository;
+    }
+
     public static void setCurrentlyLoggedIn(String login) {
         currentlyLoggedIn = login;
     }
@@ -127,6 +131,7 @@ public class SoftwareHuset {
             throw new Exception("Employee is already registered");
         }
         employeeRepository.add(employeeInfo.asEmployee());
+        System.out.println("Employee with ID "+employeeInfo.getId()+" has been registered");
     }
 
     public Employee getLoggedInEmployee() throws Exception { //Max-Peter Schrøder (s214238)
@@ -148,6 +153,9 @@ public class SoftwareHuset {
         return date.year;
     }
 
+    public List<Project> getProjectRepository(){
+        return projectRepository;
+    }
 
     public String getProjectName(int id) {
         String name = "";
