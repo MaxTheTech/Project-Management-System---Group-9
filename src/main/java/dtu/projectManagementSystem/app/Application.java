@@ -358,6 +358,7 @@ public class Application {
 
                 switch (choice) {
                     case 1:
+                        System.out.println("Enter name of the new project: ");
                         String projectName = scanner.next();
                         try{
                             softwareHuset.createProject(projectName);
@@ -382,6 +383,8 @@ public class Application {
                         String projectToEnter = scanner.next();
                         if(softwareHuset.projectExist(projectToEnter)){
                             showSpecificProjectManagementMenu(scanner,softwareHuset.getProject(projectToEnter));
+                        }else{
+                            System.out.println("Project with name "+projectToEnter+" does not exist.");
                         }
                         break;
                     case 4:
@@ -439,6 +442,7 @@ public class Application {
                         System.out.println("Project already has a manager");
                     }else{
                         project.setManagerId(softwareHuset.getLoggedInId());
+                        System.out.println("Manager for project "+project.getProjectName()+ " set to "+ softwareHuset.getLoggedInId());
                     }
                     break;
                 case 5:
