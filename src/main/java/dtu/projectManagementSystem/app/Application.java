@@ -40,33 +40,37 @@ public class Application {
                             System.out.println(errorMessage.getErrorMessage());
 
                         }
-
                         break;
 
                     case 2:
                         System.out.print("Enter your username: ");
                         String username = scanner.nextLine();
-                        System.out.println("Hello, " + username + "!");
-                        // Call the main menu function
-                        showMainMenu(scanner);
+                        try {
+                            softwareHuset.employeeLogin(username);
+                            showMainMenu(scanner);
+                        } catch (Exception e){
+                            errorMessage.setErrorMessage(e.getMessage());
+                            System.out.println(errorMessage.getErrorMessage());
+                        }
+
                         break;
+
                     case 3:
                         System.out.println("Exiting...");
                         running = false;
                         break;
                     default:
-                        System.out.println("Invalid choice. Please enter 1 or 2.");
+                        System.out.println("Invalid choice. Please enter 1, 2 or 3.");
                 }
             }
             scanner.close();
         }
-    
         private static void showMainMenu(Scanner scanner) {
             boolean mainMenuRunning = true;
             while (mainMenuRunning) {
                 System.out.println("\n=== Main Menu ===");
-                System.out.println("1. Option One");
-                System.out.println("2. Option Two");
+                System.out.println("1. Enter employee management");
+                System.out.println("2. Enter project management");
                 System.out.println("3. Logout");
     
                 System.out.print("Enter your choice: ");
@@ -74,13 +78,16 @@ public class Application {
     
                 switch (selection) {
                     case 1:
-                        System.out.println("You selected Option One!");
+                        showEmployeeManagementMenu(scanner);
                         break;
                     case 2:
-                        System.out.println("You selected Option Two!");
+                        showProjectManagementMenu(scanner);
+
+
                         break;
                     case 3:
                         System.out.println("Logging out...");
+                        // Skal måske ændre isLoggedIn - Men i princippet bør det ikk ændre noget
                         mainMenuRunning = false;
                         break;
                     default:
@@ -88,5 +95,47 @@ public class Application {
                 }
             }
         }
+
+        private static void showEmployeeManagementMenu(Scanner scanner){
+            boolean employeeManagementMenuRunning = true;
+            while (employeeManagementMenuRunning) {
+                System.out.println("\n=== Management for employee:" + softwareHuset.getLoggedInId() + " ===");
+                System.out.println("1. View employee activities");
+                System.out.println("2. Create non-project activity");
+                System.out.println("3. Edit non-project activity");
+                System.out.println("4. Register time");
+                System.out.println("5. Back");
+                System.out.print("Enter your choice: ");
+                int selection = scanner.nextInt();
+
+                switch (selection) {
+                    case 1:
+                        break;
+                    case 2:
+
+
+                        break;
+                    case 5:
+                        System.out.println("Back to Main menu...");
+                         employeeManagementMenuRunning = false;
+                        break;
+                    default:
+                        System.out.println("Invalid choice. Please enter 1, 2, 3, 4 or 5.");
+                }
+
+
+
+            }
+
+        }
+
+
+
+
+        private static void showProjectManagementMenu(Scanner scanner){
+
+        }
+
+
 }
 
