@@ -70,6 +70,10 @@ public class SoftwareHuset {
                 .orElse(null);
     }
 
+    public List<Employee> getEmployeeRepository(){
+        return employeeRepository;
+    }
+
     public static void setCurrentlyLoggedIn(String login) {
         currentlyLoggedIn = login;
     }
@@ -126,12 +130,13 @@ public class SoftwareHuset {
     }
 
     //Registers employee, is system-level command so does not require login
-    public void registerEmployee(EmployeeInfo e) throws Exception { //Max-Peter Schrøder (s214238)
-        Employee employee = findEmployee(e);
+    public void registerEmployee(EmployeeInfo employeeInfo) throws Exception { //Max-Peter Schrøder (s214238)
+        Employee employee = findEmployee(employeeInfo);
         if (employee != null) {
             throw new Exception("Employee is already registered");
         }
-        employeeRepository.add(e.asEmployee());
+        employeeRepository.add(employeeInfo.asEmployee());
+        System.out.println("Employee with ID "+employeeInfo.getId()+" has been registered");
     }
 
     public Employee getLoggedInEmployee() throws Exception { //Max-Peter Schrøder (s214238)
@@ -173,7 +178,6 @@ public class SoftwareHuset {
         }
         return false;
     }
-
 
 
 

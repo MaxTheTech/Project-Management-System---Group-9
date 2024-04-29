@@ -1,29 +1,56 @@
 package dtu.projectManagementSystem.app;
+import dtu.projectManagementSystem.domain.Employee;
+import dtu.projectManagementSystem.domain.ErrorMessageHolder;
+import dtu.projectManagementSystem.info.EmployeeInfo;
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class Application {
+
+    private static SoftwareHuset softwareHuset = new SoftwareHuset();
+    private static ErrorMessageHolder errorMessage = new ErrorMessageHolder();
+
     public static void main(String[] args) {
             Scanner scanner = new Scanner(System.in);
             boolean running = true;
-    
+
+
+
+
             // Main loop for the program
             while (running) {
                 System.out.println("\n=== Login Menu ===");
-                System.out.println("1. Login");
-                System.out.println("2. Exit");
+                System.out.println("1. Add employee");
+                System.out.println("2. Login");
+                System.out.println("3. Exit");
                 System.out.print("Enter your choice: ");
                 int choice = scanner.nextInt();
                 scanner.nextLine();  // Consume newline left-over
     
                 switch (choice) {
                     case 1:
+                        System.out.println("Enter employee ID");
+                        String newEmployeeID = scanner.nextLine();
+                        try {
+                            EmployeeInfo newEmployee = new EmployeeInfo(newEmployeeID);
+                            softwareHuset.registerEmployee(newEmployee);
+
+                        } catch (Exception e){
+                            errorMessage.setErrorMessage(e.getMessage());
+                            System.out.println(errorMessage.getErrorMessage());
+
+                        }
+
+                        break;
+
+                    case 2:
                         System.out.print("Enter your username: ");
                         String username = scanner.nextLine();
                         System.out.println("Hello, " + username + "!");
                         // Call the main menu function
                         showMainMenu(scanner);
                         break;
-                    case 2:
+                    case 3:
                         System.out.println("Exiting...");
                         running = false;
                         break;
