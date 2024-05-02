@@ -1,14 +1,15 @@
 package dtu.projectManagementSystem.app;
 import dtu.projectManagementSystem.domain.*;
 import dtu.projectManagementSystem.info.EmployeeInfo;
-import java.sql.SQLOutput;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+
+// Entire class made by s194501, Emil Andersen
 public class Application {
 
-    private static SoftwareHuset softwareHuset = new SoftwareHuset();
-    private static ErrorMessageHolder errorMessage = new ErrorMessageHolder();
+    private static final SoftwareHuset softwareHuset = new SoftwareHuset();
+    private static final ErrorMessageHolder errorMessage = new ErrorMessageHolder();
 
     public static void main(String[] args) throws Exception {
             Scanner scanner = new Scanner(System.in);
@@ -92,7 +93,6 @@ public class Application {
                         break;
                     case 3:
                         System.out.println("Logging out...");
-                        // Skal måske ændre isLoggedIn - Men i princippet bør det ikk ændre noget
                         mainMenuRunning = false;
                         break;
                     default:
