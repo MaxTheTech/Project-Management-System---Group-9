@@ -1,12 +1,9 @@
 package dtu.projectManagementSystem.junit;
 
 import dtu.projectManagementSystem.app.SoftwareHuset;
-import dtu.projectManagementSystem.domain.Project;
 import dtu.projectManagementSystem.info.EmployeeInfo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
 
 public class WhiteBoxTests {
 
