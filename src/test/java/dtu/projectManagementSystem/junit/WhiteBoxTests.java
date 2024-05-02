@@ -5,6 +5,7 @@ import dtu.projectManagementSystem.info.EmployeeInfo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+
 public class WhiteBoxTests {
 
     private final SoftwareHuset softwareHuset = new SoftwareHuset();
@@ -25,8 +26,23 @@ public class WhiteBoxTests {
                 anyMatch(i -> i.getProjectName().equals("testProject")));
 
     }
+    @Test
+    public void createProject_TestSetB() throws Exception {
+        //Setup
+        EmployeeInfo admin = new EmployeeInfo("SebB");
+        softwareHuset.registerEmployee(admin);
+        softwareHuset.employeeLogin("SebB");
 
-    public void createProject_TestSetB(){
+        //Make sure that projectRepository contains a project named "testProject" as specified in the white-box planning section
+        softwareHuset.createProject("testProject");
+        Assertions.assertTrue(softwareHuset.getProjectRepository().stream().
+                anyMatch(i -> i.getProjectName().equals("testProject")));
+
+        //Try to create another project with the same name: Test Case B, and see if the exception is thrown correctly
+        Exception exception = Assertions.assertThrows(Exception.class, () ->
+            softwareHuset.createProject("testProject"));
+
+        Assertions.assertEquals("Project already exists", exception.getMessage());
 
     }
 
