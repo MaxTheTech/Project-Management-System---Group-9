@@ -84,12 +84,12 @@ public class SoftwareHuset {
 
 
     public void createProject(String projectName) throws Exception {
-        if (projectExist(projectName)) {
-            throw new Exception("Project already exists");
+        if (projectExist(projectName)) {                                    //1
+            throw new Exception("Project already exists");                  //2
         }
-        int id = generateProjectId();
-        Project project = new Project(projectName, id,this);
-        projectRepository.add(project);
+        int id = generateProjectId();                                       //3
+        Project project = new Project(projectName, id,this);   //4
+        projectRepository.add(project);                                    //5
     }
 
     private int generateProjectId() {
