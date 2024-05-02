@@ -93,6 +93,7 @@ public class Application {
                         break;
                     case 3:
                         System.out.println("Logging out...");
+                        softwareHuset.employeeLogout();
                         mainMenuRunning = false;
                         break;
                     default:
