@@ -33,21 +33,24 @@ public class Employee {
     }
 
 
-    public List<NonProjectActivity> getEmployeeNonProjectActivities() { //Max-Peter Schrøder (s214238)
+    //Max-Peter Schrøder (s214238)
+    public List<NonProjectActivity> getEmployeeNonProjectActivities() {
         return employeeActivities.stream()
                 .filter(NonProjectActivity.class::isInstance)
                 .map(NonProjectActivity.class::cast)
                 .collect(Collectors.toList());
     }
 
-    public List<ProjectActivity> getEmployeeProjectActivities() { //Max-Peter Schrøder (s214238)
+    //Max-Peter Schrøder (s214238)
+    public List<ProjectActivity> getEmployeeProjectActivities() {
         return employeeActivities.stream()
                 .filter(a -> a instanceof ProjectActivity)
                 .map(a -> (ProjectActivity) a)
                 .collect(Collectors.toList());
     }
 
-    public NonProjectActivity getNonProjectActivity(String name) { //Max-Peter Schrøder (s214238)
+    //Max-Peter Schrøder (s214238)
+    public NonProjectActivity getNonProjectActivity(String name) {
         return getEmployeeNonProjectActivities().stream().filter(a -> a.getName().equals(name))
                 .findAny()
                 .orElse(null);
@@ -59,24 +62,28 @@ public class Employee {
                 .orElse(null);
     }
 
-    public Activity findActivity(Activity activity) { //Max-Peter Schrøder (s214238)
+    //Max-Peter Schrøder (s214238)
+    public Activity findActivity(Activity activity) {
         return employeeActivities.stream()
                 .filter(a -> Objects.equals(a.getId(), activity.getId()))  // Use == for primitive int comparison
                 .findAny()
                 .orElse(null);
     }
 
-    public boolean activityExists(Activity activity) { //Max-Peter Schrøder (s214238)
+    //Max-Peter Schrøder (s214238)
+    public boolean activityExists(Activity activity) {
         return employeeActivities.stream()
                 .anyMatch(a -> Objects.equals(a.getId(), activity.getId()));
     }
 
-    public boolean activityExists(String name) { //Max-Peter Schrøder (s214238)
+    //Max-Peter Schrøder (s214238)
+    public boolean activityExists(String name) {
         return employeeActivities.stream()
                 .anyMatch(a -> a.getName().equals(name));
     }
 
-    public void addActivity(Activity activity) throws Exception { //Max-Peter Schrøder (s214238)
+    //Max-Peter Schrøder (s214238)
+    public void addActivity(Activity activity) throws Exception {
         if (activity instanceof NonProjectActivity && activityExists(activity.getName())) {
             throw new Exception("Employee " + this.id + " is already working on " + activity.getTypeName() + ": " + activity.getName());
         } else if (activityExists(activity)) {
@@ -88,7 +95,8 @@ public class Employee {
         }
     }
 
-    public void removeActivity(Activity activity) throws Exception { //Max-Peter Schrøder (s214238)
+    //Max-Peter Schrøder (s214238)
+    public void removeActivity(Activity activity) throws Exception {
         boolean found = false;
         Activity toRemove = null;
         for (Activity currentActivity : employeeActivities) {

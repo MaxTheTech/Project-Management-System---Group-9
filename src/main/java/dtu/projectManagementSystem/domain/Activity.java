@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Activity {
-    // All these fields are public because other need to inheret this
+    // All these fields are public because other need to inherit this
     public int startingWeek;
     public int durationWeeks;
     public String name;

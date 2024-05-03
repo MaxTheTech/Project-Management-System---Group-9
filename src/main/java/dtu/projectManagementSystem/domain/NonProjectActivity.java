@@ -2,7 +2,8 @@ package dtu.projectManagementSystem.domain;
 
 import dtu.projectManagementSystem.app.DateServer;
 
-public class NonProjectActivity extends Activity { //Max-Peter Schrøder (s214238)
+//Max-Peter Schrøder (s214238)
+public class NonProjectActivity extends Activity {
 
     private DateServer startingDay = null;
     private int durationDays = 0;

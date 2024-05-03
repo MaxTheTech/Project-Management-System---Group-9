@@ -27,8 +27,8 @@ public class SoftwareHuset {
         this.projectId = (date.year - 2000) * 1000;
     }
 
-    //Logs in the employee, if they exist
-    public void employeeLogin(String id) throws Exception { //Max-Peter Schrøder (s214238)
+    //Max-Peter Schrøder (s214238)
+    public void employeeLogin(String id) throws Exception {
         EmployeeInfo ei = new EmployeeInfo(id);
         Employee employee = findEmployee(ei);
 
@@ -40,7 +40,8 @@ public class SoftwareHuset {
         System.out.println("Employee has successfully logged in with ID: " + employee.getId());
     }
 
-    public void employeeLogout() throws Exception { //Max-Peter Schrøder (s214238)
+    //Max-Peter Schrøder (s214238)
+    public void employeeLogout() throws Exception {
         checkEmployeeLoggedIn();
         Employee employee = getLoggedInEmployee();
         System.out.println("Employee "+employee.getId()+" has logged out.");
@@ -60,8 +61,8 @@ public class SoftwareHuset {
         return this.loggedInId;
     }
 
-    //Finds employee in employee repository, returns null if they don't exist
-    public Employee findEmployee(EmployeeInfo ei) { //Max-Peter Schrøder (s214238)
+    //Max-Peter Schrøder (s214238)
+    public Employee findEmployee(EmployeeInfo ei) {
         return employeeRepository.stream()
                 .filter(e -> e.getId().equals(ei.getId()))
                 .findAny()
@@ -98,7 +99,8 @@ public class SoftwareHuset {
         return projectId;
     }
 
-    public NonProjectActivity createNonProjectActivity(String name) throws Exception { //Max-Peter Schrøder (s214238)
+    //Max-Peter Schrøder (s214238)
+    public NonProjectActivity createNonProjectActivity(String name) throws Exception {
         Employee employee = getLoggedInEmployee(); // 1
 
         assert employeeRepository.stream().
@@ -149,7 +151,8 @@ public class SoftwareHuset {
         // because it doesn't check id of the current project.
     }
 
-    public int generateNonProjectActivityId() throws Exception { //Max-Peter Schrøder (s214238)
+    //Max-Peter Schrøder (s214238)
+    public int generateNonProjectActivityId() throws Exception {
         checkEmployeeLoggedIn();
         Employee employee = getLoggedInEmployee();
         List< NonProjectActivity> activities = employee.getEmployeeNonProjectActivities();
@@ -171,8 +174,8 @@ public class SoftwareHuset {
         throw new Exception("All ID's from 1-99 are taken.");
     }
 
-    //Registers employee, is system-level command so does not require login
-    public void registerEmployee(EmployeeInfo employeeInfo) throws Exception { //Max-Peter Schrøder (s214238)
+    //Max-Peter Schrøder (s214238)
+    public void registerEmployee(EmployeeInfo employeeInfo) throws Exception {
         Employee employee = findEmployee(employeeInfo);
         if (employee != null) {
             throw new Exception("Employee is already registered");
@@ -181,13 +184,15 @@ public class SoftwareHuset {
         System.out.println("Employee with ID "+employeeInfo.getId()+" has been registered");
     }
 
-    public Employee getLoggedInEmployee() throws Exception { //Max-Peter Schrøder (s214238)
+    //Max-Peter Schrøder (s214238)
+    public Employee getLoggedInEmployee() throws Exception {
         checkEmployeeLoggedIn();
         EmployeeInfo ei = new EmployeeInfo(loggedInId);
         return findEmployee(ei);
     }
 
-    private void checkEmployeeLoggedIn() throws Exception { //Max-Peter Schrøder (s214238)
+    //Max-Peter Schrøder (s214238)
+    private void checkEmployeeLoggedIn() throws Exception {
         if (!isLoggedIn()) {
             throw new Exception("Employee is not logged in. Log-in with employee ID to access command.");
         }
@@ -220,8 +225,6 @@ public class SoftwareHuset {
         }
         return false;
     }
-
-
 
 
     public Project getProject(String name){
