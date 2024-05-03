@@ -5,7 +5,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 
-// Entire class made by s194501, Emil Andersen
+// Entire class made by s194501, Emil Wille Andersen
 public class Application {
 
     private static final SoftwareHuset softwareHuset = new SoftwareHuset();

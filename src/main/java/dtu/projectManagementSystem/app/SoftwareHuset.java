@@ -183,15 +183,12 @@ public class SoftwareHuset {
     }
 
 
-
-
-    public Project getProject(String name){
+    public Project getProject(String name) throws Exception { //Emil Wille Andersen (s194501)
         for (Project project : projectRepository){
             if (project.getProjectName().equals(name)){
                 return project;
             }
-        } return null;
-        // Måske throw exception i stedet for return null?
+        } throw new Exception("No project with name "+name+" exists.");
     }
 
 }
