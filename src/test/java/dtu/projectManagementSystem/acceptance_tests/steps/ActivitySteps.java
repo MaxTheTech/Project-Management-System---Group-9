@@ -1,6 +1,7 @@
 package dtu.projectManagementSystem.acceptance_tests.steps;
 import dtu.projectManagementSystem.app.DateServer;
 import dtu.projectManagementSystem.app.SoftwareHuset;
+import dtu.projectManagementSystem.domain.NonProjectActivity;
 import dtu.projectManagementSystem.domain.ProjectActivity;
 import dtu.projectManagementSystem.domain.RegistrationTicket;
 import dtu.projectManagementSystem.info.EmployeeInfo;
@@ -21,6 +22,7 @@ public class ActivitySteps {
     private ProjectActivity activity;
     private int timeInHalfHours;
     private RegistrationTicket ticket;
+    private NonProjectActivity nonProjectActivity;
 
     @Given("the employee {string} is logged in")
     public void theEmployeeIsLoggedIn(String username) throws Exception {
@@ -56,7 +58,7 @@ public class ActivitySteps {
     @Given("there is an activity with the name {string}")
     public void thereIsAnActivityWithTheName(String activityName) throws Exception {
         // Write code here that turns the phrase above into concrete actions
-        activity = softwareHuset.createNonProjectActivity(activityName);
+        this.nonProjectActivity = softwareHuset.createNonProjectActivity(activityName);
     }
 
     @When("the employee employee registers {string} days spent on the non-project activity")
