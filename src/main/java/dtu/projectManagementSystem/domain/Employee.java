@@ -5,6 +5,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+
+import dtu.projectManagementSystem.app.DateServer;
+
 public class Employee {
 
     private static final int MAX_NUMBER_OF_PROJECTS = 20;
@@ -28,6 +31,7 @@ public class Employee {
         return Collections.unmodifiableList(employeeActivities);
     }
 
+
     public List<NonProjectActivity> getEmployeeNonProjectActivities() { //Max-Peter Schrøder (s214238)
         return employeeActivities.stream()
                 .filter(NonProjectActivity.class::isInstance)
@@ -44,6 +48,12 @@ public class Employee {
 
     public NonProjectActivity getNonProjectActivity(String name) { //Max-Peter Schrøder (s214238)
         return getEmployeeNonProjectActivities().stream().filter(a -> a.getName().equals(name))
+                .findAny()
+                .orElse(null);
+    }
+
+    public ProjectActivity getProjectActivity(String name) { //Simon Bom (s214751) (mostly copied)
+        return getEmployeeProjectActivities().stream().filter(a -> a.getName().equals(name))
                 .findAny()
                 .orElse(null);
     }

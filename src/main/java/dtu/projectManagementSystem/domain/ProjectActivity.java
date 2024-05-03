@@ -4,8 +4,6 @@ import dtu.projectManagementSystem.app.DateServer;
 
 public class ProjectActivity extends Activity {
 
-    private int startingWeek;
-    private int durationWeeks;
     private int expectedWorkloadHalfhours;
 
     private Project parentProject;

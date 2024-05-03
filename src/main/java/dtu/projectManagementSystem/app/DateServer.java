@@ -7,13 +7,15 @@ public class DateServer {
         Tuesday,
         Wednesday,
         Thursday,
-        Friday
+        Friday,
+        Saturday,
+        Sunday
     }
     private int weekDay = day.Monday.ordinal();
     private int week = 1;
     public int year = 2024;
 
-    public DateServer(int year,int week,int day){
+    public DateServer(int year, int week,   int day){
         this.year=year;
         this.week=week;
         this.weekDay=day;
@@ -32,8 +34,9 @@ public class DateServer {
     }
 
     public int getWeek() {
-        return week;
+        return this.week;
     }
+
 
     public void setWeek(int week) {
         this.week = week;

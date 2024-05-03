@@ -37,7 +37,7 @@ public class ProjectSteps {
         this.helper = helper;
     }
 
-    @Given("the current date is in the year {int}")
+        @Given("the current date is in the year {int}")
     public void the_current_date_is_in_the_year(int int1) {
         Assertions.assertEquals(int1, softwareHuset.getYear());
     }
@@ -58,9 +58,8 @@ public class ProjectSteps {
 
     @Given("a project with the name {string} exists")
     public void a_project_with_the_name_exists(String string) throws Exception {
-        softwareHuset.createProject(string);
+        this.project = softwareHuset.createProject(string);
         Assertions.assertTrue(softwareHuset.projectExist(string));
-        this.project=softwareHuset.getProject(string);
 
     }
 
@@ -97,8 +96,7 @@ public class ProjectSteps {
 
     @And("he is the project manager of a project {string}")
     public void heIsTheProjectManagerOfAProject(String string) throws Exception {
-        softwareHuset.createProject(string);
-        this.project=softwareHuset.getProject(string);
+        this.project = softwareHuset.createProject(string);
         project.setManagerId(softwareHuset.getLoggedInId());
         Assertions.assertEquals(project.getManagerId(),softwareHuset.getLoggedInId());
     }
