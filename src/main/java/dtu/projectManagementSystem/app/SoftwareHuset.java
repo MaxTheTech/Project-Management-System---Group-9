@@ -84,14 +84,24 @@ public class SoftwareHuset {
     public static List<String> employees;
 
 
-    public Project createProject(String projectName) throws Exception {
-        if (projectExist(projectName)) {
-            throw new Exception("Project already exists");
+    public void createProject(String projectName) throws Exception {
+        assert true : "Precondition violated"; //precondition
+
+        if (projectExist(projectName)) {                                    //1
+            //assert postcondition in case A
+            assert projectRepository.stream().
+                    anyMatch(i -> i.getProjectName().equals(projectName))
+                    : "Postcondition A";
+            throw new Exception("Project already exists");                  //2
         }
-        int id = generateProjectId();
-        Project project = new Project(projectName, id,this);
-        projectRepository.add(project);
-        return project;
+        int id = generateProjectId();                                       //3
+        Project project = new Project(projectName, id,this);    //4
+        projectRepository.add(project);                                    //5
+
+        //assert postcondition in case B
+        assert projectRepository.stream().
+                anyMatch(i -> i.getProjectName().equals(projectName))
+                : "Postcondition B";
     }
 
     private int generateProjectId() {
@@ -227,13 +237,12 @@ public class SoftwareHuset {
     }
 
 
-    public Project getProject(String name){
+    public Project getProject(String name) throws Exception { //Emil Wille Andersen (s194501)
         for (Project project : projectRepository){
             if (project.getProjectName().equals(name)){
                 return project;
             }
-        } return null;
-        // Måske throw exception i stedet for return null?
+        } throw new Exception("No project with name "+name+" exists.");
     }
 
 }

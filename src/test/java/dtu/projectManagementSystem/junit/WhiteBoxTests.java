@@ -23,12 +23,13 @@ public class WhiteBoxTests {
     }
     @Test
     public void createProject_TestSetB() throws Exception {
-        //Make sure that projectRepository contains a project named "testProject" as specified in the white-box planning section
+        //Make sure that projectRepository contains a project named "testProject"
         softwareHuset.createProject("testProject");
         Assertions.assertTrue(softwareHuset.getProjectRepository().stream().
                 anyMatch(i -> i.getProjectName().equals("testProject")));
 
-        //Try to create another project with the same name: Test Case B, and see if the exception is thrown correctly
+        //Try to create another project with the same name: Test Case B,
+        //and see if the exception is thrown correctly
         Exception exception = Assertions.assertThrows(Exception.class, () ->
             softwareHuset.createProject("testProject"));
 

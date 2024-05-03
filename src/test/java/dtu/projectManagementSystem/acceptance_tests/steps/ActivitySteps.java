@@ -37,7 +37,8 @@ public class ActivitySteps {
     }
     @Given("an activity with the name {string} exists in project {string}")
     public void anActivityWithTheNameExistsInProject(String activityName, String projectName) throws Exception {
-        project = softwareHuset.createProject(projectName);
+        softwareHuset.createProject(projectName);
+        this.project=softwareHuset.getProject(projectName);
         activity = softwareHuset.createProjectActivity(project, activityName);
     }
     @When("the employee registers {int} half-hours spent on the activity")

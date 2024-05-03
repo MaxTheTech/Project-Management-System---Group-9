@@ -58,8 +58,9 @@ public class ProjectSteps {
 
     @Given("a project with the name {string} exists")
     public void a_project_with_the_name_exists(String string) throws Exception {
-        this.project = softwareHuset.createProject(string);
+        softwareHuset.createProject(string);
         Assertions.assertTrue(softwareHuset.projectExist(string));
+        this.project=softwareHuset.getProject(string);
 
     }
 
@@ -96,7 +97,8 @@ public class ProjectSteps {
 
     @And("he is the project manager of a project {string}")
     public void heIsTheProjectManagerOfAProject(String string) throws Exception {
-        this.project = softwareHuset.createProject(string);
+        softwareHuset.createProject(string);
+        this.project=softwareHuset.getProject(string);
         project.setManagerId(softwareHuset.getLoggedInId());
         Assertions.assertEquals(project.getManagerId(),softwareHuset.getLoggedInId());
     }

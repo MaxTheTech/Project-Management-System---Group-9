@@ -30,6 +30,5 @@ public class AssertTests {
                 anyMatch(i -> i.getProjectName().equals("assertTest")))){
             System.out.println("assertTest is in the list..");
         }
-
     }
 }
