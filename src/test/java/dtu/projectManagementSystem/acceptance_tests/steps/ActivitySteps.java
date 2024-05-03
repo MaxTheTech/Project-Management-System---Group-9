@@ -64,7 +64,7 @@ public class ActivitySteps {
     @When("the employee {string} registers {string} days spent on the non-project activity")
     public void theEmployeeEmployeeRegistersDaysSpentOnTheNonProjectActivity(String employee, String days) {
         // Write code here that turns the phrase above into concrete actions
-        this.employee.createTicket
+        //this.employee.createTicket
     }
 
     @Then("the time spent by the employee is registered to the non-project activity and the employee")
