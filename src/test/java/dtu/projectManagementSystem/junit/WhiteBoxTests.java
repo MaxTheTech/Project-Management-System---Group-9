@@ -12,11 +12,6 @@ public class WhiteBoxTests {
 
     @Test
     public void createProject_TestSetA() throws Exception {
-        //Setup
-        EmployeeInfo admin = new EmployeeInfo("SebA");
-        softwareHuset.registerEmployee(admin);
-        softwareHuset.employeeLogin("SebA");
-
         //Make sure that projectRepository is empty as specified in the white-box planning section
         Assertions.assertEquals(0, softwareHuset.getProjectRepository().size());
 
@@ -28,11 +23,6 @@ public class WhiteBoxTests {
     }
     @Test
     public void createProject_TestSetB() throws Exception {
-        //Setup
-        EmployeeInfo admin = new EmployeeInfo("SebB");
-        softwareHuset.registerEmployee(admin);
-        softwareHuset.employeeLogin("SebB");
-
         //Make sure that projectRepository contains a project named "testProject" as specified in the white-box planning section
         softwareHuset.createProject("testProject");
         Assertions.assertTrue(softwareHuset.getProjectRepository().stream().

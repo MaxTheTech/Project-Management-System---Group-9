@@ -108,17 +108,10 @@ public class Project{
             throw new Exception("Only the project manager can generate reports");
         }
 
-        String managerIdToReport;
-        if(hasManager){
-            managerIdToReport = managerId;
-        } else {
-            managerIdToReport = "None";
-        }
-
         StringBuilder builder = new StringBuilder().
                 append("ID: ").append(projectId).append("\n").
                 append("Name: ").append(projectName).append("\n").
-                append("Manager: ").append(managerIdToReport).append("\n").
+                append("Manager: ").append(managerId).append("\n").
                 append("Starting week: ").append(startingWeek).append("\n").
                 append("Duration in weeks: ").append(durationInWeeks).append("\n").
                 append("Expected workload in hours: ").append(expectedWorkloadHours).append("\n").
@@ -133,5 +126,10 @@ public class Project{
 
     public void addActivity(ProjectActivity activity){
         projectActivities.add(activity);
+    }
+
+    public void getweek(){
+
+
     }
 }

@@ -84,12 +84,23 @@ public class SoftwareHuset {
 
 
     public void createProject(String projectName) throws Exception {
+        assert true : "Precondition violated"; //precondition
+
         if (projectExist(projectName)) {                                    //1
+            //assert postcondition in case A
+            assert projectRepository.stream().
+                    anyMatch(i -> i.getProjectName().equals(projectName))
+                    : "Postcondition A";
             throw new Exception("Project already exists");                  //2
         }
         int id = generateProjectId();                                       //3
         Project project = new Project(projectName, id,this);   //4
         projectRepository.add(project);                                    //5
+
+        //assert postcondition in case B
+        assert projectRepository.stream().
+                anyMatch(i -> i.getProjectName().equals(projectName))
+                : "Postcondition B";
     }
 
     private int generateProjectId() {
@@ -181,8 +192,6 @@ public class SoftwareHuset {
         }
         return false;
     }
-
-
 
 
     public Project getProject(String name){
