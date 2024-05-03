@@ -1,7 +1,6 @@
 package dtu.projectManagementSystem.junit;
 
 import dtu.projectManagementSystem.app.SoftwareHuset;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class AssertTests {
@@ -21,7 +20,7 @@ public class AssertTests {
         for(int i = 0; i < softwareHuset.getProjectRepository().size(); i++) {
             s.append(softwareHuset.getProjectRepository().get(i).getProjectName()).append("\n");
         }
-        System.out.println(s.toString());
+        System.out.println(s);
 
         /* Theis will automatically tell me if "assertTest" is there,
          * in case the list of projects is really long, and not quickly
