@@ -16,9 +16,9 @@ public class SoftwareHuset {
     private boolean isLoggedIn = false;
     private String loggedInId;
     private List<Employee> employeeRepository = new ArrayList<>();
-    private List<Project> projectRepository = new ArrayList<>();
+    private ArrayList<Project> projectRepository = new ArrayList<>();
     private static String currentlyLoggedIn;
-    public DateServer date = new DateServer();
+    private DateServer date = new DateServer();
     private int projectId = 0;
 
     private ErrorMessageHolder errorMessage;
@@ -83,15 +83,13 @@ public class SoftwareHuset {
     public static List<String> employees;
 
 
-    public Project createProject(String projectName) throws Exception {
+    public void createProject(String projectName) throws Exception {
         if (projectExist(projectName)) {
             throw new Exception("Project already exists");
         }
         int id = generateProjectId();
         Project project = new Project(projectName, id,this);
         projectRepository.add(project);
-        return project;
-        // if needed, so you don't have to do linear search just creating project
     }
 
     private int generateProjectId() {
@@ -99,7 +97,7 @@ public class SoftwareHuset {
         return projectId;
     }
 
-    public NonProjectActivity createNonProjectActivity(String name) throws Exception { //Max-Peter Schrøder (s214238)
+    public void createNonProjectActivity(String name) throws Exception { //Max-Peter Schrøder (s214238)
         Employee employee = getLoggedInEmployee(); // 1
 
         if (employee.getNonProjectActivity(name) != null) { // 2
@@ -110,21 +108,6 @@ public class SoftwareHuset {
         NonProjectActivity activity = new NonProjectActivity(name, id); // 5
         employee.addActivity(activity); // 6
         System.out.println("Employee "+employee.getId()+" has successfully created "+activity.getTypeName()+": "+activity.getName()); // 7
-        return activity;
-    }
-
-    public ProjectActivity createProjectActivity(Project project, String name) throws Exception { // Simon Bom (s214751)
-        Employee employee = getLoggedInEmployee(); // 1
-
-        if (project.hasActivity(name)) { // 2
-            throw new Exception("Project activity "+name+" for project "+project+" already exists"); // 3
-        }
-
-        int id = generateProjectActivityId(); // 4
-        ProjectActivity activity = new ProjectActivity(name, id); // 5
-        project.addActivity(activity); // 6
-        System.out.println("Employee "+employee.getId()+" has successfully created "+activity.getTypeName()+": "+activity.getName()); // 7
-        return activity;
     }
 
     public int generateNonProjectActivityId() throws Exception { //Max-Peter Schrøder (s214238)
@@ -147,13 +130,6 @@ public class SoftwareHuset {
             }
         }
         throw new Exception("All ID's from 1-99 are taken.");
-    }
-
-    public int generateProjectActivityId() throws Exception { //Simon Bom
-        return 11;
-        // id is not a requirement and is basically just a hassle.
-        // the above generateNonProjectActivityId is flawed,
-        // because it doesn't check id of the current project.
     }
 
     //Registers employee, is system-level command so does not require login
@@ -218,14 +194,6 @@ public class SoftwareHuset {
         // Måske throw exception i stedet for return null?
     }
 
-    public boolean employeeExist(String name) {
-        for (int i = 0; i < employeeRepository.size(); i++) {
-            if (employeeRepository.get(i).getId().equals(name)) {
-                return true;
-            }
-        }
-        return false;
-    }
 }
 
 

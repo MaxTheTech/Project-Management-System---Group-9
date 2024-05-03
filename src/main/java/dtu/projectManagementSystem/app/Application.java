@@ -7,7 +7,6 @@ import java.util.Scanner;
 
 public class Application {
 
-
     private static SoftwareHuset softwareHuset = new SoftwareHuset();
     private static ErrorMessageHolder errorMessage = new ErrorMessageHolder();
 
@@ -302,7 +301,7 @@ public class Application {
                             Project project = softwareHuset.getProject(projectName);
                             System.out.println("Enter project activity name:");
                             String activityName = scanner.next();
-                            if(project.hasActivity(activityName)){
+                            if(project.HasActivity(activityName)){
                                 System.out.println("Enter time spent");
                                 System.out.println("Feature not yet implemented");
                                 ////////////////////////////////////////////////////////////////
@@ -433,7 +432,7 @@ public class Application {
                 case 3:
                     System.out.println("Enter project activity to edit:");
                     String projectActivity = scanner.next();
-                    if(project.hasActivity(projectActivity)){
+                    if(project.HasActivity(projectActivity)){
                         showEditProjectActivityMenu(scanner, project.getActivity(projectActivity));
                     }
 
@@ -455,15 +454,9 @@ public class Application {
 
                     break;
                 case 6:
-                    System.out.println("Enter name for new project activity:");
+                    System.out.println("Enter name for new project activity");
                     String newProjectActivityName = scanner.next();
-                    Project currentProject = project;
-                    try {
-                        softwareHuset.createProjectActivity(currentProject, newProjectActivityName);
-                    } catch (Exception e){
-                        errorMessage.setErrorMessage(e.getMessage());
-                        System.out.println(errorMessage.getErrorMessage());
-                    }
+                    System.out.println("Feature not yet implemented");
                     ////////////////////////////////////////////////////////////////
                     //////    Create project activity is not implemented    ////////
                     ////////////////////////////////////////////////////////////////

@@ -3,6 +3,7 @@ package dtu.projectManagementSystem.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 
@@ -60,14 +61,14 @@ public class Employee {
 
     public Activity findActivity(Activity activity) { //Max-Peter Schrøder (s214238)
         return employeeActivities.stream()
-                .filter(a -> a.getId() == activity.getId())  // Use == for primitive int comparison
+                .filter(a -> Objects.equals(a.getId(), activity.getId()))  // Use == for primitive int comparison
                 .findAny()
                 .orElse(null);
     }
 
     public boolean activityExists(Activity activity) { //Max-Peter Schrøder (s214238)
         return employeeActivities.stream()
-                .anyMatch(a -> a.getId() == activity.getId());
+                .anyMatch(a -> Objects.equals(a.getId(), activity.getId()));
     }
 
     public boolean activityExists(String name) { //Max-Peter Schrøder (s214238)
@@ -91,7 +92,7 @@ public class Employee {
         boolean found = false;
         Activity toRemove = null;
         for (Activity currentActivity : employeeActivities) {
-            if (currentActivity.getId() == activity.getId()) {
+            if (Objects.equals(currentActivity.getId(), activity.getId())) {
                 found = true;
                 toRemove = currentActivity;
                 break;
