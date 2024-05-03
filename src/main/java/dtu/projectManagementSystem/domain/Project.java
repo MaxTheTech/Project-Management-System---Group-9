@@ -79,7 +79,7 @@ public class Project{
         this.projectName=name;
 
     }
-    public boolean HasActivity(String activityName){
+    public boolean hasActivity(String activityName){
         for (Activity activity:projectActivities){
             if (activity.getName().equals(activityName)){
                 return true;

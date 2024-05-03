@@ -61,10 +61,10 @@ public class ActivitySteps {
         this.nonProjectActivity = softwareHuset.createNonProjectActivity(activityName);
     }
 
-    @When("the employee employee registers {string} days spent on the non-project activity")
-    public void theEmployeeEmployeeRegistersDaysSpentOnTheNonProjectActivity(String string) {
+    @When("the employee {string} registers {string} days spent on the non-project activity")
+    public void theEmployeeEmployeeRegistersDaysSpentOnTheNonProjectActivity(String employee, String days) {
         // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        this.employee.createTicket
     }
 
     @Then("the time spent by the employee is registered to the non-project activity and the employee")

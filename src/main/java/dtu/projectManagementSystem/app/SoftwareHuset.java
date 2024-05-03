@@ -83,13 +83,14 @@ public class SoftwareHuset {
     public static List<String> employees;
 
 
-    public void createProject(String projectName) throws Exception {
+    public Project createProject(String projectName) throws Exception {
         if (projectExist(projectName)) {
             throw new Exception("Project already exists");
         }
         int id = generateProjectId();
         Project project = new Project(projectName, id,this);
         projectRepository.add(project);
+        return project;
     }
 
     private int generateProjectId() {
@@ -97,7 +98,7 @@ public class SoftwareHuset {
         return projectId;
     }
 
-    public void createNonProjectActivity(String name) throws Exception { //Max-Peter Schrøder (s214238)
+    public NonProjectActivity createNonProjectActivity(String name) throws Exception { //Max-Peter Schrøder (s214238)
         Employee employee = getLoggedInEmployee(); // 1
 
         assert employeeRepository.stream().
@@ -124,6 +125,28 @@ public class SoftwareHuset {
         assert activity.getStartingDay() == null && activity.getDurationDays() == 0;
 
         System.out.println("Employee "+employee.getId()+" has successfully created "+activity.getTypeName()+": "+activity.getName()); // 7
+        return activity;
+    }
+
+    public ProjectActivity createProjectActivity(Project project, String name) throws Exception { // Simon Bom (s214751)
+        Employee employee = getLoggedInEmployee(); // 1
+
+        if (project.hasActivity(name)) { // 2
+            throw new Exception("Project activity "+name+" for project "+project+" already exists"); // 3
+        }
+
+        int id = generateProjectActivityId(); // 4
+        ProjectActivity activity = new ProjectActivity(name, id); // 5
+        project.addActivity(activity); // 6
+        System.out.println("Employee "+employee.getId()+" has successfully created "+activity.getTypeName()+": "+activity.getName()); // 7
+        return activity;
+    }
+
+    public int generateProjectActivityId() throws Exception { //Simon Bom
+        return 11;
+        // id is not a requirement and is basically just a hassle.
+        // the above generateNonProjectActivityId is flawed,
+        // because it doesn't check id of the current project.
     }
 
     public int generateNonProjectActivityId() throws Exception { //Max-Peter Schrøder (s214238)
