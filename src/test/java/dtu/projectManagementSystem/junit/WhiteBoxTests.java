@@ -76,6 +76,80 @@ public class WhiteBoxTests {
     }
 
 
+    //Test by Max-Peter Schrøder (s214238)
+    @Test
+    public void createNonProjectActivity_TestSetA() throws Exception {
+        //Set the name of the non-project activity
+        String name = "Vacation";
+
+        //Assert that the employee is not logged into the system.
+        Assertions.assertFalse(softwareHuset.isLoggedIn());
+
+        //Catch exception when trying to create a non-project activity without being logged in
+        Exception exception = Assertions.assertThrows(Exception.class, () ->
+                softwareHuset.createNonProjectActivity(name));
+
+        //Assert that the system gives the correct error message
+        Assertions.assertEquals("Employee is not logged in. Log-in with employee ID to access command.", exception.getMessage());
+
+        //Print the error message
+        System.out.println(exception.getMessage());
+    }
+
+
+
+    //Test by Max-Peter Schrøder (s214238)
+    @Test
+    public void createNonProjectActivity_TestSetB() throws Exception {
+        //Set the id of the logged in employee and the name of the non-project activity
+        String id = "mps";
+        String name = "Vacation";
+
+        //Register the employee and login to the system
+        softwareHuset.registerEmployee(new EmployeeInfo(id));
+        softwareHuset.employeeLogin(id);
+
+        //Assert that the employee is logged in
+        Assertions.assertTrue(softwareHuset.isLoggedIn());
+        Assertions.assertSame(id, softwareHuset.getLoggedInId());
+
+        //Create first non-project activity with the given name
+        softwareHuset.createNonProjectActivity(name);
+
+        //Catch exception when trying to create another non-project activity with the same name
+        Exception exception = Assertions.assertThrows(Exception.class, () ->
+                softwareHuset.createNonProjectActivity(name));
+
+        //Assert that the system gives the correct error message
+        Assertions.assertEquals("Non-project activity "+name+" for employee "+softwareHuset.getLoggedInEmployee().getId()+" already exists", exception.getMessage());
+
+        //Print the error message
+        System.out.println(exception.getMessage());
+    }
+
+
+    //Test by Max-Peter Schrøder (s214238)
+    @Test
+    public void createNonProjectActivity_TestSetC() throws Exception {
+        //Set the id of the logged in employee and the name of the non-project activity
+        String id = "mps";
+        String name = "Vacation";
+
+        //Register the employee and login to the system
+        softwareHuset.registerEmployee(new EmployeeInfo(id));
+        softwareHuset.employeeLogin(id);
+
+        //Assert that the employee is logged in
+        Assertions.assertTrue(softwareHuset.isLoggedIn());
+        Assertions.assertSame(id, softwareHuset.getLoggedInId());
+
+        //Create the non-project activity with the given name
+        softwareHuset.createNonProjectActivity(name);
+
+        //Assert that the non-project activity with the given name has been created for the employee
+        Assertions.assertTrue(softwareHuset.getLoggedInEmployee().getEmployeeNonProjectActivities().stream().
+                anyMatch(i -> i.getName().equals(name)));
+    }
 
 
 }

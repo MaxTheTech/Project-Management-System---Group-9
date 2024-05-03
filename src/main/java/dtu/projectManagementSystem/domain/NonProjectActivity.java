@@ -4,8 +4,8 @@ import dtu.projectManagementSystem.app.DateServer;
 
 public class NonProjectActivity extends Activity { //Max-Peter Schrøder (s214238)
 
-    private DateServer startingDay;
-    private int durationDays;
+    private DateServer startingDay = null;
+    private int durationDays = 0;
     public NonProjectActivity(String name, Integer id) {
         super(name, id);
     }

@@ -14,7 +14,7 @@ import dtu.projectManagementSystem.info.EmployeeInfo;
 public class SoftwareHuset {
 
     private boolean isLoggedIn = false;
-    private String loggedInId;
+    private String loggedInId = null;
     private List<Employee> employeeRepository = new ArrayList<>();
     private ArrayList<Project> projectRepository = new ArrayList<>();
     private static String currentlyLoggedIn;
@@ -100,13 +100,29 @@ public class SoftwareHuset {
     public void createNonProjectActivity(String name) throws Exception { //Max-Peter Schrøder (s214238)
         Employee employee = getLoggedInEmployee(); // 1
 
+        assert employeeRepository.stream().
+                anyMatch(i -> i.getId().equals(employee.getId()))
+                : "Precondition";
+        assert isLoggedIn && loggedInId != null : "Precondition";
+
         if (employee.getNonProjectActivity(name) != null) { // 2
+
+            assert employee.getEmployeeNonProjectActivities().stream().
+                    anyMatch(i -> i.getName().equals(name))
+                    : "Postcondition";
+
             throw new Exception("Non-project activity "+name+" for employee "+employee.getId()+" already exists"); // 3
         }
 
         int id = generateNonProjectActivityId(); // 4
         NonProjectActivity activity = new NonProjectActivity(name, id); // 5
         employee.addActivity(activity); // 6
+
+        assert employee.getEmployeeNonProjectActivities().stream().
+                anyMatch(i -> i.getName().equals(name))
+                : "Postcondition";
+        assert activity.getStartingDay() == null && activity.getDurationDays() == 0;
+
         System.out.println("Employee "+employee.getId()+" has successfully created "+activity.getTypeName()+": "+activity.getName()); // 7
     }
 
