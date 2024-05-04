@@ -57,11 +57,11 @@ public class WhiteBoxTests {
         softwareHuset.registerEmployee(new EmployeeInfo("EmiB"));
 
         //Try to register the ID "EmiB" in the system
-        Exception exception = Assertions.assertThrows(Exception.class, () ->
+        AssertionError assertionError = Assertions.assertThrows(AssertionError.class, () ->
                 softwareHuset.registerEmployee(new EmployeeInfo("EmiB")));
 
         //Assert that the system gives the correct error message
-        Assertions.assertEquals("Employee is already registered", exception.getMessage());
+        Assertions.assertEquals("Precondition failed: Employee is already registered", assertionError.getMessage());
     }
 
     //Test by Emil Wille Andersen (s194501)
