@@ -185,13 +185,24 @@ public class SoftwareHuset {
     }
 
     //Max-Peter Schrøder (s214238)
+    //Assert statements added by Emil Wille Andersen (s194501)
     public void registerEmployee(EmployeeInfo employeeInfo) throws Exception {
+        // Pre-condition: Check that no employee with the same ID exists in the repository
+        assert employeeRepository.stream()
+                .noneMatch(e -> e.getId().equals(employeeInfo.getId()))
+                : "Precondition failed: Employee is already registered";
+
         Employee employee = findEmployee(employeeInfo);
         if (employee != null) {
             throw new Exception("Employee is already registered");
         }
         employeeRepository.add(employeeInfo.asEmployee());
         System.out.println("Employee with ID "+employeeInfo.getId()+" has been registered");
+
+        // Post-condition: Verify that the employee has been added to the repository
+        assert employeeRepository.stream()
+                .anyMatch(e -> e.getId().equals(employeeInfo.getId()))
+                : "Postcondition failed: Employee was not added to the repository";
     }
 
     //Max-Peter Schrøder (s214238)

@@ -41,7 +41,7 @@ public class Project{
         return this.projectId;
     }
 
-    public void setManagerId(String managerId) throws Exception {
+    public void setManagerId(String managerId) throws Exception {// Emil Wille Andersen (s194501)
         if (hasManager){
             throw new Exception("Project already has an assigned project manager");
         }
@@ -49,7 +49,7 @@ public class Project{
         this.hasManager = true;
     }
 
-    public ProjectActivity getActivity(String activityName){
+    public ProjectActivity getActivity(String activityName){// Emil Wille Andersen (s194501)
         for (ProjectActivity activity : projectActivities){
             if (activity.getName().equals(activityName)){
                 return activity;
@@ -72,14 +72,14 @@ public class Project{
         this.expectedWorkloadHours = expectedWorkloadHours;
     }
 
-    public void setProjectName(String name) throws Exception{
+    public void setProjectName(String name) throws Exception{// Emil Wille Andersen (s194501)
         if (softwareHuset.projectExist(name)){
             throw new Exception("This project name already exists as a separate project");
         }
         this.projectName=name;
 
     }
-    public boolean hasActivity(String activityName){
+    public boolean hasActivity(String activityName){ // Emil Wille Andersen (s194501)
         for (Activity activity:projectActivities){
             if (activity.getName().equals(activityName)){
                 return true;
