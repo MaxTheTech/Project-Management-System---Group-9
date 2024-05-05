@@ -269,6 +269,39 @@ public class SoftwareHuset {
         return !getAvailableEmployees(startingDate, duration).isEmpty();
     }
 
+    //Charlotte Grimstrup (s204382)
+    public int generateProjectActivityID(List<ProjectActivity> projectActivities){
+        int id = 0;
+        id=projectActivities.size();
+        for (ProjectActivity projectActivity : projectActivities){
+            if (projectActivity.getId().equals(id) && id <=98){
+                id++;
+            }
+        }
+        return id;
+    }
+    //Charlotte Grimstrup (s204382)
+    public ProjectActivity createProjectActivity(String project, String name) throws Exception {
+        if (!projectExist(project)){ //1
+            throw new Exception("This project doesn't exist"); //2
+        }
+
+        Project projectName = getProject(project); //3
+        List<ProjectActivity> projectActivities =projectName.getProjectActivities(); //4
+
+        if (projectActivities.isEmpty()){ //5
+            ProjectActivity projectActivity = new ProjectActivity(name, generateProjectActivityID(projectActivities)); //6
+            projectName.addActivity(projectActivity); //7
+            return projectActivity;
+        }else {
+            if (projectName.hasActivity(name) == true){//8
+                throw new Exception("This project activity name already exists as a activity"); //9
+            }
+            ProjectActivity projectActivity = new ProjectActivity(name, generateProjectActivityID(projectActivities)); //10
+            projectName.addActivity(projectActivity); //11
+            return projectActivity;
+        }
+    }
 }
 
 
