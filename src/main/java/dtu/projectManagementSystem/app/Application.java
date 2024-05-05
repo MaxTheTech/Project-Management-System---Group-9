@@ -229,6 +229,12 @@ public class Application {
 
                 switch (choice){
                     case 1:
+                        if(nonProjectActivity.getStartingDay()==null){
+                            System.out.println("A starting date has not yet been set for this activity");
+                        }else {
+                            System.out.println("The starting date for this activity is currently:");
+                            System.out.println(nonProjectActivity.getStartingDay().toString());
+                        }
                         System.out.println("Enter the new starting date for "+nonProjectActivity.getName());
                         try {
                             System.out.println("Enter starting year");
@@ -257,6 +263,9 @@ public class Application {
                         break;
 
                     case 2:
+                        System.out.println("The duration for "+nonProjectActivity.getName()+" is currently "+nonProjectActivity.getDurationDays());
+
+
                         System.out.println("Enter duration (in days) for "+nonProjectActivity.getName());
                         try {
                             int duration = scanner.nextInt();  // Attempts to read an int from user
@@ -533,10 +542,16 @@ public class Application {
 
             switch (choice) {
                 case 1:
+                    if(projectActivity.getStartingDate()==null){
+                        System.out.println("The starting week for this activity has not yet been set");
+                    }else{
+                        System.out.println("The starting week for this activity is currently set to "+projectActivity.getStartingDate().getWeek());
+                    }
                     try {
                         System.out.println("Enter starting week:");
                         int startingWeek = scanner.nextInt();
-                        projectActivity.setStartingWeek(startingWeek);
+                        DateServer startingDate = new DateServer(0,startingWeek,0);
+                        projectActivity.setStartingWeek(startingDate);
                         System.out.println("Starting week for "+projectActivity.getName()+" set to "+startingWeek);
 
                     } catch (InputMismatchException e) {
@@ -544,6 +559,7 @@ public class Application {
                     }
                     break;
                 case 2:
+                    System.out.println("The duration for this activity is currently set to "+projectActivity.getDurationWeeks()+" weeks.");
                     try {
                         System.out.println("Enter duration:");
                         int duration = scanner.nextInt();
@@ -555,6 +571,7 @@ public class Application {
                     }
                     break;
                 case 3:
+                    System.out.println("The expected workload for this activity is currently set to "+projectActivity.getExpectedWorkloadHalfhours()+" half hours");
                     try {
                         System.out.println("Enter expected workload:");
                         int expectedWorkload = scanner.nextInt();
@@ -592,6 +609,11 @@ public class Application {
 
             switch (choice) {
                 case 1:
+                    if(project.isStartingDateHasBeenSet()){
+                        System.out.println("The starting date for the project is currently year "+project.getStartingYear()+" week "+project.getStartingWeek());
+                    }else{
+                        System.out.println("The starting date for this project has not been set yet");
+                    }
                     try {
                         System.out.println("Enter starting year:");
                         int startingYear = scanner.nextInt();
@@ -600,6 +622,7 @@ public class Application {
                             int startingWeek = scanner.nextInt();
                             project.setStartingYear(startingYear);
                             project.setStartingWeek(startingWeek);
+                            project.setStartingDateHasBeenSet();
                             System.out.println("Starting date for project "+project.getProjectName()+" set to year "+startingYear+" week "+startingWeek);
 
                         } catch (InputMismatchException e) {
@@ -611,6 +634,7 @@ public class Application {
                     }
                     break;
                 case 2:
+                    System.out.println("The duration for this project is currently set to "+ project.getDurationInWeeks()+" weeks.");
                     try {
                         System.out.println("Enter duration:");
                         int duration = scanner.nextInt();
@@ -622,6 +646,7 @@ public class Application {
                     }
                     break;
                 case 3:
+                    System.out.println("The expected workload for this project is currently set to "+project.getExpectedWorkloadHours()+" half hours");
                     try {
                         System.out.println("Enter expected workload (in half hours)");
                         int expectedWorkload = scanner.nextInt();

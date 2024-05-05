@@ -7,29 +7,18 @@ public class ProjectActivity extends Activity {
     private int expectedWorkloadHalfhours;
 
     private Project parentProject;
+    private String name;
     public ProjectActivity(String name, Integer id) {
         super(name, id);
-    }
-
-    public void setStartingWeek(int startingWeek) {
-        this.startingWeek = startingWeek;
-    }
-
-    public int getStartingWeek() {
-        return this.startingWeek;
-    }
-
-    public void setDurationWeeks(int durationWeeks) {
-        this.durationWeeks = durationWeeks;
-    }
-
-    public int getDurationWeeks() {
-        return this.durationWeeks;
     }
 
     public Project getParentproject(){
         return parentProject;
     }
+
+    public void setParentProject(Project parentProject){this.parentProject = parentProject;}
+
+
 
     public void setExpectedWorkloadHalfhours(int halfhours) {
         this.expectedWorkloadHalfhours = halfhours;

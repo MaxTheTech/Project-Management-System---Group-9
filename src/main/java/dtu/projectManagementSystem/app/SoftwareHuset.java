@@ -133,24 +133,21 @@ public class SoftwareHuset {
     }
 
     public ProjectActivity createProjectActivity(Project project, String name) throws Exception { // Simon Bom (s214751)
-        Employee employee = getLoggedInEmployee(); // 1
+        Employee employee = getLoggedInEmployee();
 
-        if (project.hasActivity(name)) { // 2
-            throw new Exception("Project activity "+name+" for project "+project+" already exists"); // 3
+        if (project.hasActivity(name)) {
+            throw new Exception("Project activity "+name+" for project "+project+" already exists");
         }
 
-        int id = generateProjectActivityId(); // 4
-        ProjectActivity activity = new ProjectActivity(name, id); // 5
-        project.addActivity(activity); // 6
-        System.out.println("Employee "+employee.getId()+" has successfully created "+activity.getTypeName()+": "+activity.getName()); // 7
+        int id = generateProjectActivityId();
+        ProjectActivity activity = new ProjectActivity(name, id);
+        project.addActivity(activity);
+        System.out.println("Employee "+employee.getId()+" has successfully created "+activity.getTypeName()+": "+activity.getName());
         return activity;
     }
 
     public int generateProjectActivityId() throws Exception { //Simon Bom
         return 11;
-        // id is not a requirement and is basically just a hassle.
-        // the above generateNonProjectActivityId is flawed,
-        // because it doesn't check id of the current project.
     }
 
     //Max-Peter Schrøder (s214238)
@@ -177,13 +174,24 @@ public class SoftwareHuset {
     }
 
     //Max-Peter Schrøder (s214238)
+    //Assert statements added by Emil Wille Andersen (s194501)
     public void registerEmployee(EmployeeInfo employeeInfo) throws Exception {
+        // Pre-condition: Check that no employee with the same ID exists in the repository
+        assert employeeRepository.stream()
+                .noneMatch(e -> e.getId().equals(employeeInfo.getId()))
+                : "Precondition failed: Employee is already registered";
+
         Employee employee = findEmployee(employeeInfo);
         if (employee != null) {
             throw new Exception("Employee is already registered");
         }
         employeeRepository.add(employeeInfo.asEmployee());
         System.out.println("Employee with ID "+employeeInfo.getId()+" has been registered");
+
+        // Post-condition: Verify that the employee has been added to the repository
+        assert employeeRepository.stream()
+                .anyMatch(e -> e.getId().equals(employeeInfo.getId()))
+                : "Postcondition failed: Employee was not added to the repository";
     }
 
     //Max-Peter Schrøder (s214238)
@@ -230,8 +238,8 @@ public class SoftwareHuset {
         return false;
     }
 
-    //Sebastian A. Ladegaard - s215530
-    public Project getProject(String name) throws Exception { //Emil Wille Andersen (s194501)
+    //Emil Wille Andersen (s194501)
+    public Project getProject(String name) throws Exception {
         for (Project project : projectRepository){
             if (project.getProjectName().equals(name)){
                 return project;
@@ -239,6 +247,55 @@ public class SoftwareHuset {
         } throw new Exception("No project with name "+name+" exists.");
     }
 
+    // Simon Bom (s214751)
+    public List<Employee> getAvailableEmployees(DateServer startingDate, int duration) {
+        List<Employee> availableEmployees = new ArrayList<>();
+        for (Employee employee : getEmployeeRepository()){
+            if (employee.isAvailableDuring(startingDate, duration)) {
+                availableEmployees.add(employee);
+            }
+        }
+        return availableEmployees;
+    }
+
+    // Simon Bom (s214751)
+    public boolean anEmployeeIsAvailable(DateServer startingDate, int duration){
+        return !getAvailableEmployees(startingDate, duration).isEmpty();
+    }
+
+    //Charlotte Grimstrup (s204382)
+    public int generateProjectActivityID(List<ProjectActivity> projectActivities){
+        int id = 0;
+        id=projectActivities.size();
+        for (ProjectActivity projectActivity : projectActivities){
+            if (projectActivity.getId().equals(id) && id <=98){
+                id++;
+            }
+        }
+        return id;
+    }
+    //Charlotte Grimstrup (s204382)
+    public ProjectActivity createProjectActivity(String project, String name) throws Exception {
+        if (!projectExist(project)){ //1
+            throw new Exception("This project doesn't exist"); //2
+        }
+
+        Project projectName = getProject(project); //3
+        List<ProjectActivity> projectActivities =projectName.getProjectActivities(); //4
+
+        if (projectActivities.isEmpty()){ //5
+            ProjectActivity projectActivity = new ProjectActivity(name, generateProjectActivityID(projectActivities)); //6
+            projectName.addActivity(projectActivity); //7
+            return projectActivity;
+        }else {
+            if (projectName.hasActivity(name) == true){//8
+                throw new Exception("This project activity name already exists as a activity"); //9
+            }
+            ProjectActivity projectActivity = new ProjectActivity(name, generateProjectActivityID(projectActivities)); //10
+            projectName.addActivity(projectActivity); //11
+            return projectActivity;
+        }
+    }
 }
 
 

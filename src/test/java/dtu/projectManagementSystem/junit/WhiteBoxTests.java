@@ -1,6 +1,8 @@
 package dtu.projectManagementSystem.junit;
 
+import dtu.projectManagementSystem.app.DateServer;
 import dtu.projectManagementSystem.app.SoftwareHuset;
+import dtu.projectManagementSystem.domain.Employee;
 import dtu.projectManagementSystem.info.EmployeeInfo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -57,11 +59,11 @@ public class WhiteBoxTests {
         softwareHuset.registerEmployee(new EmployeeInfo("EmiB"));
 
         //Try to register the ID "EmiB" in the system
-        Exception exception = Assertions.assertThrows(Exception.class, () ->
+        AssertionError assertionError = Assertions.assertThrows(AssertionError.class, () ->
                 softwareHuset.registerEmployee(new EmployeeInfo("EmiB")));
 
         //Assert that the system gives the correct error message
-        Assertions.assertEquals("Employee is already registered", exception.getMessage());
+        Assertions.assertEquals("Precondition failed: Employee is already registered", assertionError.getMessage());
     }
 
     //Test by Emil Wille Andersen (s194501)
@@ -151,6 +153,37 @@ public class WhiteBoxTests {
         Assertions.assertTrue(softwareHuset.getLoggedInEmployee().getEmployeeNonProjectActivities().stream().
                 anyMatch(i -> i.getName().equals(name)));
     }
+
+
+
+    //Test by Simon Bom (s214751)
+    @Test
+    public void createTicket_TestSetA() throws Exception {
+        //Make sure there is time available
+        //Assertions.assertFalse(employee.hasAlreadyRegistedTimeDuring(start, timeInHalfHours));
+
+        //Try to create ticket
+        //this.ticket = this.activity.createTicket(start, timeInHalfHours);
+
+        //Assert that the ticket is now in the system
+        //Assertions.assertEquals(activity.getActivityById(),this.ticket);
+    }
+
+    //Test by Simon Bom (s214751)
+    @Test
+    public void createTicket_TestSetB() throws Exception {
+        //Make sure there is time is occupied
+        //activity.createTicket(start, timeInHalfHours);
+        //Assertions.assertTrue(employee.hasAlreadyRegistedTimeDuring(start, timeInHalfHours));
+
+        //Try to create ticket
+        //this.ticket = this.activity.createTicket(start, timeInHalfHours);
+
+        //Assert that the ticket is now in the system
+        //Assertions.assertEquals(activity.getActivityById(),this.ticket);
+    }
+
+
 
 
 }

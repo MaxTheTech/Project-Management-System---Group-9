@@ -14,11 +14,11 @@ public class Project{
     private String projectName;
 
     private SoftwareHuset softwareHuset;
-
     //Project time variables
     private int durationInWeeks;
     private int expectedWorkloadHours;
 
+    private boolean startingDateHasBeenSet=false;
     private int startingWeek;
     private int startingYear;
     private List<ProjectActivity> projectActivities = new ArrayList<>();
@@ -29,7 +29,12 @@ public class Project{
         this.projectId = projectId;
         this.softwareHuset = softwareHuset;
     }
-
+    public void setStartingDateHasBeenSet(){
+        this.startingDateHasBeenSet = true;
+    }
+    public boolean isStartingDateHasBeenSet(){
+        return startingDateHasBeenSet;
+    }
     public String getProjectName(){
         return this.projectName;
     }
@@ -41,6 +46,7 @@ public class Project{
         return this.projectId;
     }
 
+    // Emil Wille Andersen (s194501)
     public void setManagerId(String managerId) throws Exception {
         if (hasManager){
             throw new Exception("Project already has an assigned project manager");
@@ -49,6 +55,7 @@ public class Project{
         this.hasManager = true;
     }
 
+    // Emil Wille Andersen (s194501)
     public ProjectActivity getActivity(String activityName){
         for (ProjectActivity activity : projectActivities){
             if (activity.getName().equals(activityName)){
@@ -72,6 +79,7 @@ public class Project{
         this.expectedWorkloadHours = expectedWorkloadHours;
     }
 
+    // Emil Wille Andersen (s194501)
     public void setProjectName(String name) throws Exception{
         if (softwareHuset.projectExist(name)){
             throw new Exception("This project name already exists as a separate project");
@@ -79,6 +87,8 @@ public class Project{
         this.projectName=name;
 
     }
+
+    // Emil Wille Andersen (s194501)
     public boolean hasActivity(String activityName){
         for (Activity activity:projectActivities){
             if (activity.getName().equals(activityName)){
