@@ -111,4 +111,41 @@ public class Employee {
         }
         employeeActivities.remove(toRemove);
     }
+
+    // Simon Bom (s214751)
+    public boolean isAvailableDuring(DateServer startingDate, int duration){
+        // Checking non project activities
+        int startQuery = startingDate.getWeek();
+        int durationQuery = duration;
+        // Check if they have less than 20 activities
+        if (employeeActivities.size() < 20 ){
+            return true;
+        }
+        // Otherwise we have to check if one of the activities doesn't overlap with the timeslot.
+        for (Activity activity : employeeActivities) {
+            int s = activity.getStartingDate().getWeek();
+            int d = activity.getDurationWeeks();
+            if (! overlaps(startQuery,durationQuery,s,d)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // Simon Bom (s214751)
+    private boolean overlaps(int x, int d1, int y, int d2){
+        // Calculate the end points of the intervals
+        int xEnd = x + d1;
+        int yEnd = y + d2;
+
+        // Check if the intervals overlap and return
+        return x <= yEnd && y <= xEnd;
+    }
+
+    // Simon Bom (s214751) (shell for now)
+    public boolean hasAlreadyRegistedTimeDuring(DateServer start, int timeInHalfHours) {
+        return false;
+    }
+
+
 }

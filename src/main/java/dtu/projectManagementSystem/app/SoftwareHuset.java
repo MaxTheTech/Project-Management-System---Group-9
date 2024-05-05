@@ -141,24 +141,21 @@ public class SoftwareHuset {
     }
 
     public ProjectActivity createProjectActivity(Project project, String name) throws Exception { // Simon Bom (s214751)
-        Employee employee = getLoggedInEmployee(); // 1
+        Employee employee = getLoggedInEmployee();
 
-        if (project.hasActivity(name)) { // 2
-            throw new Exception("Project activity "+name+" for project "+project+" already exists"); // 3
+        if (project.hasActivity(name)) {
+            throw new Exception("Project activity "+name+" for project "+project+" already exists");
         }
 
-        int id = generateProjectActivityId(); // 4
-        ProjectActivity activity = new ProjectActivity(name, id); // 5
-        project.addActivity(activity); // 6
-        System.out.println("Employee "+employee.getId()+" has successfully created "+activity.getTypeName()+": "+activity.getName()); // 7
+        int id = generateProjectActivityId();
+        ProjectActivity activity = new ProjectActivity(name, id);
+        project.addActivity(activity);
+        System.out.println("Employee "+employee.getId()+" has successfully created "+activity.getTypeName()+": "+activity.getName());
         return activity;
     }
 
     public int generateProjectActivityId() throws Exception { //Simon Bom
         return 11;
-        // id is not a requirement and is basically just a hassle.
-        // the above generateNonProjectActivityId is flawed,
-        // because it doesn't check id of the current project.
     }
 
     //Max-Peter Schrøder (s214238)
@@ -243,6 +240,22 @@ public class SoftwareHuset {
                 return project;
             }
         } throw new Exception("No project with name "+name+" exists.");
+    }
+
+    // Simon Bom (s214751)
+    public List<Employee> getAvailableEmployees(DateServer startingDate, int duration) {
+        List<Employee> availableEmployees = new ArrayList<>();
+        for (Employee employee : getEmployeeRepository()){
+            if (employee.isAvailableDuring(startingDate, duration)) {
+                availableEmployees.add(employee);
+            }
+        }
+        return availableEmployees;
+    }
+
+    // Simon Bom (s214751)
+    public boolean anEmployeeIsAvailable(DateServer startingDate, int duration){
+        return !getAvailableEmployees(startingDate, duration).isEmpty();
     }
 
 }

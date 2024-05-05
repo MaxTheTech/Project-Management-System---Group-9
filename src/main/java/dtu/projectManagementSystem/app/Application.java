@@ -536,7 +536,8 @@ public class Application {
                     try {
                         System.out.println("Enter starting week:");
                         int startingWeek = scanner.nextInt();
-                        projectActivity.setStartingWeek(startingWeek);
+                        DateServer startingDate = new DateServer(2024,startingWeek,1);
+                        projectActivity.setStartingWeek(startingDate);
                         System.out.println("Starting week for "+projectActivity.getName()+" set to "+startingWeek);
 
                     } catch (InputMismatchException e) {

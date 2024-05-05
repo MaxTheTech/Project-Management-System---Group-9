@@ -11,22 +11,6 @@ public class ProjectActivity extends Activity {
         super(name, id);
     }
 
-    public void setStartingWeek(int startingWeek) {
-        this.startingWeek = startingWeek;
-    }
-
-    public int getStartingWeek() {
-        return this.startingWeek;
-    }
-
-    public void setDurationWeeks(int durationWeeks) {
-        this.durationWeeks = durationWeeks;
-    }
-
-    public int getDurationWeeks() {
-        return this.durationWeeks;
-    }
-
     public Project getParentproject(){
         return parentProject;
     }
