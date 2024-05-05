@@ -37,6 +37,9 @@ public class DateServer {
         return this.week;
     }
 
+    public String toString(){
+        return "Year "+ year+" week "+week+" day "+weekDay+".";
+    }
 
     public void setWeek(int week) {
         this.week = week;

@@ -244,8 +244,8 @@ public class SoftwareHuset {
         return false;
     }
 
-
-    public Project getProject(String name) throws Exception { //Emil Wille Andersen (s194501)
+    //Emil Wille Andersen (s194501)
+    public Project getProject(String name) throws Exception {
         for (Project project : projectRepository){
             if (project.getProjectName().equals(name)){
                 return project;
