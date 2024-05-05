@@ -4,7 +4,7 @@ Feature: Assign an employee to a project activity
 
 Scenario: Assign employee to project activity
     Given an employee is logged in
-    And the employee is the project manager of a project "TestProject"
+    And the employee is the project manager of the project "TestProject"
     And an activity with the name "TestActivity" exists in the project
     When the project manager assigns an employee to the project activity
     And The employee is assigned to the project activity
