@@ -132,7 +132,8 @@ public class SoftwareHuset {
         return activity;
     }
 
-    public ProjectActivity createProjectActivity(Project project, String name) throws Exception { // Simon Bom (s214751)
+    // Simon Bom (s214751)
+    public ProjectActivity createProjectActivity(Project project, String name) throws Exception {
         Employee employee = getLoggedInEmployee();
 
         if (project.hasActivity(name)) {

@@ -2,6 +2,7 @@ package dtu.projectManagementSystem.domain;
 
 import dtu.projectManagementSystem.app.DateServer;
 
+// Simon Bom (s214751)
 public class Ticket {
     private DateServer startingDate;
     private DateServer registrationDate;

@@ -37,17 +37,26 @@ public abstract class Activity {
     public void setName(String name) {this.name = name;}
     public void setId(Integer id) {this.id = id;}
 
-
+    // Simon Bom (s214751)
     public Ticket createTicket(Employee employee, DateServer start, int timeInHalfHours) throws Exception {
+        // Pre-condition: Check that employee is available
+        // assert employee.hasAlreadyRegistedTimeDuring(start, timeInHalfHours) : "Precondition failed: Employee is not available";
+
         boolean available = employee.hasAlreadyRegistedTimeDuring(start, timeInHalfHours);
         if (!available) {
             throw new Exception("Employee has already registered time for this time slot");
         }
         Ticket ticket = new Ticket(start, timeInHalfHours, employee);
         this.tickets.add(ticket);
+
+        // Post-condition: Check that the ticket is created.
+        // int id = ticket.getId();
+        // assert this.getTicketById(id) == ticket : "Postcondition failed: ticket was not added to the activity";
+
         return ticket;
     }
 
+    // Simon Bom (s214751)
     public Ticket getTicketById(int id) {
         for (Ticket t : tickets) {
             if (t.getId() == id) {

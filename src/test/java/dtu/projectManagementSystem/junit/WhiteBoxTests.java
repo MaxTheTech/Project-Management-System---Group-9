@@ -3,6 +3,7 @@ package dtu.projectManagementSystem.junit;
 import dtu.projectManagementSystem.app.DateServer;
 import dtu.projectManagementSystem.app.SoftwareHuset;
 import dtu.projectManagementSystem.domain.Employee;
+import dtu.projectManagementSystem.domain.ProjectActivity;
 import dtu.projectManagementSystem.info.EmployeeInfo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -160,13 +161,18 @@ public class WhiteBoxTests {
     @Test
     public void createTicket_TestSetA() throws Exception {
         //Make sure there is time available
-        //Assertions.assertFalse(employee.hasAlreadyRegistedTimeDuring(start, timeInHalfHours));
+        // softwareHuset.registerEmployee(new EmployeeInfo("sbm"));
+        // Employee employee = softwareHuset.findEmployee(new EmployeeInfo("sbm"));
+        // DateServer start = new DateServer(2024,5,5);
+        // int timeInHalfHours = 6;
+        // Assertions.assertFalse(employee.hasAlreadyRegistedTimeDuring(start, timeInHalfHours));
 
         //Try to create ticket
-        //this.ticket = this.activity.createTicket(start, timeInHalfHours);
+        // ProjectActivity activity = softwareHuset.createProjectActivity(project, name);
+        // this.ticket = this.activity.createTicket(start, timeInHalfHours);
 
         //Assert that the ticket is now in the system
-        //Assertions.assertEquals(activity.getActivityById(),this.ticket);
+        // Assertions.assertEquals(activity.getActivityById(),this.ticket);
     }
 
     //Test by Simon Bom (s214751)
