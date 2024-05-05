@@ -2,6 +2,7 @@ package dtu.projectManagementSystem.app;
 
 public class DateServer {
 
+    //Sebastian A. Ladegaard - s215530
     enum day {
         Monday,
         Tuesday,

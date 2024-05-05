@@ -73,17 +73,8 @@ public class SoftwareHuset {
         return employeeRepository;
     }
 
-    public static void setCurrentlyLoggedIn(String login) {
-        currentlyLoggedIn = login;
-    }
 
-    public static String getCurrentlyLoggedIn() {
-        return currentlyLoggedIn;
-    }
-
-    public static List<String> employees;
-
-
+    //Sebastian A. Ladegaard - s215530
     public void createProject(String projectName) throws Exception {
         assert true : "Precondition violated"; //precondition
 
@@ -104,6 +95,7 @@ public class SoftwareHuset {
                 : "Postcondition B";
     }
 
+    //Sebastian A. Ladegaard - s215530
     private int generateProjectId() {
         projectId++;
         return projectId;
@@ -216,6 +208,7 @@ public class SoftwareHuset {
         return projectRepository;
     }
 
+    //Sebastian A. Ladegaard - s215530
     public String getProjectName(int id) {
         String name = "";
         for (int i = 0; i < projectRepository.size(); i++) {
@@ -227,6 +220,7 @@ public class SoftwareHuset {
         return name;
     }
 
+    //Sebastian A. Ladegaard - s215530
     public boolean projectExist(String name) {
         for (int i = 0; i < projectRepository.size(); i++) {
             if (projectRepository.get(i).getProjectName().equals(name)) {
@@ -236,7 +230,7 @@ public class SoftwareHuset {
         return false;
     }
 
-
+    //Sebastian A. Ladegaard - s215530
     public Project getProject(String name) throws Exception { //Emil Wille Andersen (s194501)
         for (Project project : projectRepository){
             if (project.getProjectName().equals(name)){

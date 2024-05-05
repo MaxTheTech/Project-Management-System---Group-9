@@ -10,7 +10,7 @@ public class WhiteBoxTests {
 
     private final SoftwareHuset softwareHuset = new SoftwareHuset();
 
-    @Test
+    @Test //Sebastian A. Ladegaard - s215530
     public void createProject_TestSetA() throws Exception {
         //Make sure that projectRepository is empty as specified in the white-box planning section
         Assertions.assertEquals(0, softwareHuset.getProjectRepository().size());
@@ -21,7 +21,7 @@ public class WhiteBoxTests {
                 anyMatch(i -> i.getProjectName().equals("testProject")));
 
     }
-    @Test
+    @Test //Sebastian A. Ladegaard - s215530
     public void createProject_TestSetB() throws Exception {
         //Make sure that projectRepository contains a project named "testProject"
         softwareHuset.createProject("testProject");

@@ -23,6 +23,7 @@ public class Project{
     private int startingYear;
     private List<ProjectActivity> projectActivities = new ArrayList<>();
 
+    //Sebastian A. Ladegaard - s215530
     public Project(String projectName, int projectId,SoftwareHuset softwareHuset){
         this.projectName = projectName;
         this.projectId = projectId;
@@ -32,7 +33,6 @@ public class Project{
     public String getProjectName(){
         return this.projectName;
     }
-
     public void setStartingWeek(int startingWeek){this.startingWeek=startingWeek;}
     public int getStartingWeek(){return startingWeek;}
     public void setStartingYear(int startingYear){this.startingYear=startingYear;}
@@ -103,22 +103,26 @@ public class Project{
         return projectActivities;
     }
 
+    //Sebastian A. Ladegaard - s215530
     public String projectReport() throws Exception {
         if (!softwareHuset.getLoggedInEmployee().getId().equals(managerId)){
             throw new Exception("Only the project manager can generate reports");
         }
-
+        /* This code snippet was deleted during refactoring by Sebastian L. - s215530
+         * as described in the report, this code doesn't follow the KISS principle.
+         *
         String managerIdToReport;
         if(hasManager){
             managerIdToReport = managerId;
         } else {
             managerIdToReport = "None";
         }
+           */
 
         StringBuilder builder = new StringBuilder().
                 append("ID: ").append(projectId).append("\n").
                 append("Name: ").append(projectName).append("\n").
-                append("Manager: ").append(managerIdToReport).append("\n").
+                append("Manager: ").append(managerId).append("\n").
                 append("Starting week: ").append(startingWeek).append("\n").
                 append("Duration in weeks: ").append(durationInWeeks).append("\n").
                 append("Expected workload in hours: ").append(expectedWorkloadHours).append("\n").
