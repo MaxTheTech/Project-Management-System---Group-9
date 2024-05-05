@@ -1,4 +1,4 @@
-Feature: Create project activity
+Feature: Create project activity # Charlotte Ena Manikutdlak Grimstrup - s204382
     Description: Creating an activty and setting the parameters
     Actor: Project manager
 

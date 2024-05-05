@@ -1,4 +1,4 @@
-Feature: Edit project
+Feature: Edit project # Emil Wille Andersen - s194501
     Description: Set and edit the parameters of a project
     Actor: Project manager
 

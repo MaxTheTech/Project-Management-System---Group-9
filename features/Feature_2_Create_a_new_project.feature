@@ -1,4 +1,4 @@
-Feature: Create a new project
+Feature: Create a new project # Sebastian Alberg Ladegaard - s215530
     Description: Create a new project with a name and generated ID
     Actor: Employee
 

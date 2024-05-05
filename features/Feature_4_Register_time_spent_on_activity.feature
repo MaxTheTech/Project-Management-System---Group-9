@@ -1,4 +1,4 @@
-Feature: Register time spent on activity
+Feature: Register time spent on activity # Simon Bom - s214751
     Description: Register the time spent on an activity on the given day
     Actor: Employee
 

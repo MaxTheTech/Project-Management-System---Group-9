@@ -1,4 +1,4 @@
-Feature: Create non-project activity
+Feature: Create non-project activity # Max-Peter Schrøder - s214238
     Description: Creating a non-project activity
     Actor: Employee
 

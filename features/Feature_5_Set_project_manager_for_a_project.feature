@@ -1,4 +1,4 @@
-Feature: Set project manager for a project
+Feature: Set project manager for a project # Emil Wille Andersen - s194501
     Description: An employee assigns themselves as project manager for an unassigned project
     Actor: Employee / Project manager
 

@@ -1,4 +1,4 @@
-Feature: Check available employees
+Feature: Check available employees # Simon Bom - s214751
     Description: The act of checking the employees schedule for a specific project
     Actor: Project manager
 

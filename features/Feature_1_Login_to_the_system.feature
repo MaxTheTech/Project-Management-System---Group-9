@@ -1,4 +1,4 @@
-Feature: Login to the system
+Feature: Login to the system  # Max-Peter Schrøder - s214238
     Description: Login into the system
     Actor: Employee
 

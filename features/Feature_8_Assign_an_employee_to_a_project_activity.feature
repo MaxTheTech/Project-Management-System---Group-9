@@ -1,4 +1,4 @@
-Feature: Assign an employee to a project activity
+Feature: Assign an employee to a project activity # Charlotte Ena Manikutdlak Grimstrup - s204382
     Description: The act of assigning an employee to a project activity
     Actor: project manager
 
