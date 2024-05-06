@@ -15,12 +15,11 @@ public class SoftwareHuset {
 
     private boolean isLoggedIn = false;
     private String loggedInId = null;
-    private List<Employee> employeeRepository = new ArrayList<>();
-    private ArrayList<Project> projectRepository = new ArrayList<>();
+    private final List<Employee> employeeRepository = new ArrayList<>();
+    private final ArrayList<Project> projectRepository = new ArrayList<>();
     private static String currentlyLoggedIn;
-    private DateServer date = new DateServer();
+    private final DateServer date = new DateServer();
     private int projectId = 0;
-
     private ErrorMessageHolder errorMessage;
 
     public SoftwareHuset() {
@@ -289,7 +288,7 @@ public class SoftwareHuset {
             projectName.addActivity(projectActivity); //7
             return projectActivity;
         }else {
-            if (projectName.hasActivity(name) == true){//8
+            if (projectName.hasActivity(name)){//8
                 throw new Exception("This project activity name already exists as a activity"); //9
             }
             ProjectActivity projectActivity = new ProjectActivity(name, generateProjectActivityID(projectActivities)); //10
