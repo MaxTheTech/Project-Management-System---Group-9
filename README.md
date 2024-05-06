@@ -2,6 +2,9 @@
 
 This is a project management system for the fictional company SoftwareHuset A/S. This project was created by group 9 as a part of the course "02161 - Software Engineering 1".
 
+The Project can be found on GitHub with the link HTTPS: https://github.com/MaxTheTech/Project-Management-System---Group-9.git
+
+
 ## 1. Run the Project Management System
 
 To run the system as intended, go to:
