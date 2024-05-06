@@ -275,7 +275,7 @@ public class SoftwareHuset {
         return id;
     }
     //Charlotte Grimstrup (s204382)
-    public ProjectActivity createProjectActivity(String project, String name) throws Exception {
+    public ProjectActivity createProjectActivity2(String project, String name) throws Exception {
         if (!projectExist(project)){ //1
             throw new Exception("This project doesn't exist"); //2
         }
@@ -295,6 +295,30 @@ public class SoftwareHuset {
             projectName.addActivity(projectActivity); //11
             return projectActivity;
         }
+    }
+
+    public boolean assignEmployeeToActivity(Employee empl, String projectActivity, String project) throws Exception {
+        Project projectName = getProject(project);
+        if(!projectName.hasActivity(projectActivity)){
+            throw new Exception("Activity does not exist in the given project");
+        }
+        if (!getLoggedInId().matches(projectName.getManagerId())){
+            throw new Exception("You are not the project manager for this project");
+        }
+        if (empl.activityExists(projectActivity)){
+            throw new Exception("Already assigned to project");
+        }
+        //empl.equals(projectName.getActivity(projectActivity).getAssignedEmployee())
+        if (projectName.getActivity(projectActivity).getAssignedEmployee() != null ){
+            throw new Exception("Another employee is already assigned to this activity");
+        }
+        if(empl.getEmployeeProjectActivities().size() >= 20){
+            throw new Exception("Employee cannot currently take on more activities");
+        }
+        empl.addActivity(projectName.getActivity(projectActivity));
+        projectName.getActivity(projectActivity).setAssignedEmployee(empl);
+
+        return true;
     }
 }
 

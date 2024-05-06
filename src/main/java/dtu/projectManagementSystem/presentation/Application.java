@@ -467,10 +467,8 @@ public class Application {
                 case 6:
                     System.out.println("Enter name for new project activity");
                     String newProjectActivityName = scanner.next();
-                    System.out.println("Feature not yet implemented");
-                    ////////////////////////////////////////////////////////////////
-                    //////    Create project activity is not implemented    ////////
-                    ////////////////////////////////////////////////////////////////
+                    softwareHuset.createProjectActivity2(project.getProjectName(), newProjectActivityName);
+                    System.out.println("New project activity "+newProjectActivityName+" created in this project");
                     break;
                 case 7:
                     specificProjectManagementMenu=false;

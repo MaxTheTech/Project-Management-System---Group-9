@@ -8,6 +8,7 @@ public class ProjectActivity extends Activity {
 
     private Project parentProject;
     private String name;
+    private Employee assignedEmployee;
     public ProjectActivity(String name, Integer id) {
         super(name, id);
     }
@@ -30,6 +31,13 @@ public class ProjectActivity extends Activity {
 
     public String getTypeName() {
         return "Project Activity";
+    }
+
+    public Employee getAssignedEmployee(){
+        return this.assignedEmployee;
+    }
+    public void setAssignedEmployee(Employee assignedEmployeeName){
+        this.assignedEmployee = assignedEmployeeName;
     }
 
 }
