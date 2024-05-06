@@ -11,6 +11,7 @@ To run the system as intended, go to:
 
 `src/main/java/dtu/projectManagementSystem/app/Application.java`
 
+By default when running the app, no users are registered in the system.
 The app is run in the terminal using the scanner. Below is shown how to get to different features in the system. When running the application, the user will be prompted with numbers to write to go through the menus.
 
 ### Menu

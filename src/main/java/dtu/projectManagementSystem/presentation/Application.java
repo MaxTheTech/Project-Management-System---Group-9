@@ -47,6 +47,13 @@ public class Application {
                         break;
 
                     case 2:
+                        if (softwareHuset.getEmployeeRepository().size()==0){
+                            System.out.println("There are no registered employees in the system");
+                            System.out.println("Add an employee to login");
+                            break;
+                        }
+
+
                         System.out.print("Enter your username: ");
                         String username = scanner.next();
                         try {
